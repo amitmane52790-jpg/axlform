@@ -1,1 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Truck Availability Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --navy: #0f1e3c;
+    --teal: #0d7a6e;
+    --teal2: #0a5f55;
+    --amber: #f59e0b;
+    --red: #e53e3e;
+    --light: #f4f7fb;
+    --white: #ffffff;
+    --gray: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 4px 24px rgba(15,30,60,0.10);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+    background: var(--light);
+    min-height: 100vh;
+    color: #1e293b;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0f1e3c 0%, #1a3a6e 60%, #0d7a6e 100%);
+    color: #fff;
+    padding: 2.5rem 1.5rem 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+  .header-inner { position: relative; z-index: 1; }
+  .header-icon {
+    width: 70px; height: 70px; margin: 0 auto 1.2rem;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .header-icon svg { width: 36px; height: 36px; }
+  header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 800; letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+  header p {
+    font-size: 0.95rem; opacity: 0.75; max-width: 460px; margin: 0 auto;
+    line-height: 1.65;
+  }
+  .wa-badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: rgba(37,211,102,0.18); border: 1px solid rgba(37,211,102,0.35);
+    color: #6effa0; padding: 0.35rem 1rem; border-radius: 100px;
+    font-size: 0.76rem; font-weight: 700; margin-top: 1rem;
+    letter-spacing: 0.04em;
+  }
+  .wa-badge svg { width: 14px; height: 14px; }
+
+  /* ── MAIN CARD ── */
+  main {
+    max-width: 700px; margin: -2rem auto 3rem;
+    padding: 0 1.25rem;
+    position: relative; z-index: 1;
+  }
+  .card {
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  /* ── SECTION HEADER ── */
+  .sec-head {
+    background: linear-gradient(90deg, #f0f7ff, #e8f5f2);
+    border-bottom: 1.5px solid var(--border);
+    padding: 1rem 1.75rem;
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .sec-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--navy); color: #fff;
+    font-size: 0.75rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .sec-title {
+    font-size: 0.88rem; font-weight: 700; color: var(--navy);
+    letter-spacing: 0.01em;
+  }
+
+  /* ── FORM BODY ── */
+  .form-body { padding: 1.75rem; }
+
+  .field-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .field-group.full { grid-template-columns: 1fr; }
+
+  .field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .field label {
+    font-size: 0.78rem; font-weight: 700; color: #374151;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .field label .flag {
+    font-size: 1rem; line-height: 1;
+  }
+  .field label .city-name {
+    flex: 1;
+  }
+
+  .input-wrap { position: relative; }
+  .input-wrap .unit {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    font-size: 0.72rem; font-weight: 600; color: var(--gray);
+    pointer-events: none;
+  }
+
+  input[type="number"],
+  input[type="text"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-family: inherit;
+    color: #1e293b;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -moz-appearance: textfield;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(13,122,110,0.12);
+  }
+  input::placeholder, textarea::placeholder { color: #b0bec5; }
+  textarea { resize: vertical; min-height: 80px; }
+  select { cursor: pointer; }
+
+  /* ── TRUCK COUNT CARDS ── */
+  .truck-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .truck-card {
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1.1rem 1rem;
+    background: #fafbff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .truck-card:focus-within {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(13,122,110,0.10);
+    background: #fff;
+  }
+  .truck-card-top {
+    display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.65rem;
+  }
+  .truck-flag { font-size: 1.3rem; line-height: 1; }
+  .truck-city { font-size: 0.8rem; font-weight: 700; color: var(--navy); }
+  .truck-province { font-size: 0.68rem; color: var(--gray); font-weight: 500; margin-top: 1px; }
+
+  .count-input-wrap {
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .count-btn {
+    width: 32px; height: 32px; border-radius: 8px;
+    border: 1.5px solid var(--border); background: #fff;
+    font-size: 1.1rem; font-weight: 700; color: var(--teal);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+    flex-shrink: 0;
+  }
+  .count-btn:hover { background: var(--teal); color: #fff; border-color: var(--teal); }
+  .count-num {
+    flex: 1; text-align: center;
+    padding: 0.45rem 0.5rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem; font-weight: 700; color: var(--navy);
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+    -moz-appearance: textfield;
+  }
+  .count-num::-webkit-inner-spin-button,
+  .count-num::-webkit-outer-spin-button { -webkit-appearance: none; }
+  .count-num:focus { border-color: var(--teal); box-shadow: 0 0 0 2px rgba(13,122,110,0.12); }
+
+  /* ── TRAILER CHIPS ── */
+  .trailer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.65rem;
+    margin-bottom: 1.2rem;
+  }
+  .trailer-chip input[type="checkbox"] { display: none; }
+  .trailer-chip label {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.6rem 0.9rem; border: 1.5px solid var(--border);
+    border-radius: 10px; cursor: pointer; font-size: 0.78rem; font-weight: 600;
+    color: #374151; background: #fafbff;
+    transition: all 0.15s; user-select: none;
+  }
+  .trailer-chip label .ticon { font-size: 1.1rem; }
+  .trailer-chip input:checked + label {
+    border-color: var(--teal); background: #e0f5f2;
+    color: var(--teal2);
+  }
+  .trailer-chip label:hover { border-color: #94d4cd; background: #f0fbf9; }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1.5px; background: var(--border); margin: 1.5rem 0; }
+
+  /* ── SUBMIT ── */
+  .submit-area { padding: 1.5rem 1.75rem; background: #f8faff; border-top: 1.5px solid var(--border); }
+  .submit-note { font-size: 0.75rem; color: var(--gray); margin-bottom: 1rem; line-height: 1.55; }
+  .submit-note strong { color: #25d366; }
+  .btn-submit {
+    width: 100%;
+    padding: 0.95rem;
+    background: #25d366;
+    color: #fff;
+    border: none; border-radius: 12px;
+    font-size: 1rem; font-weight: 800;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 18px rgba(37,211,102,0.35);
+  }
+  .btn-submit:hover { background: #1da851; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(37,211,102,0.45); }
+  .btn-submit:active { transform: translateY(0) scale(0.98); }
+  .btn-submit svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(100px);
+    background: #0f1e3c; color: #fff;
+    padding: 0.75rem 1.5rem; border-radius: 50px;
+    font-size: 0.83rem; font-weight: 600;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    z-index: 9999; white-space: nowrap;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 500px) {
+    .truck-grid { grid-template-columns: 1fr; }
+    .trailer-grid { grid-template-columns: repeat(2, 1fr); }
+    .field-group { grid-template-columns: 1fr; }
+    .form-body { padding: 1.25rem; }
+    .submit-area { padding: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="header-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13" rx="2"/>
+        <path d="M16 8h4l3 5v4h-7V8z"/>
+        <circle cx="5.5" cy="18.5" r="2.5"/>
+        <circle cx="18.5" cy="18.5" r="2.5"/>
+      </svg>
+    </div>
+    <h1>Truck Availability Form</h1>
+    <p>Tell us where your trucks are located and what you're hauling — we'll match you with the right loads.</p>
+    <div class="wa-badge">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.551 4.113 1.516 5.842L0 24l6.291-1.497A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.003-1.371l-.359-.214-3.732.888.913-3.636-.235-.373A9.777 9.777 0 012.182 12C2.182 6.579 6.579 2.182 12 2.182S21.818 6.579 21.818 12 17.421 21.818 12 21.818z"/>
+      </svg>
+      Sends directly to WhatsApp: +1 (880) 546-4284
+    </div>
+  </div>
+</header>
+
+<!-- FORM -->
+<main>
+  <div class="card">
+
+    <!-- SECTION 1: TRUCK LOCATIONS -->
+    <div class="sec-head">
+      <div class="sec-num">1</div>
+      <div class="sec-title">🚛 How Many Trucks Do You Have in Each Location?</div>
+    </div>
+    <div class="form-body">
+      <div class="truck-grid">
+
+        <div class="truck-card">
+          <div class="truck-card-top">
+            <span class="truck-flag">🍁</span>
+            <div>
+              <div class="truck-city">British Columbia</div>
+              <div class="truck-province">BC, Canada</div>
+            </div>
+          </div>
+          <div class="count-input-wrap">
+            <button class="count-btn" onclick="changeCount('bc', -1)">−</button>
+            <input class="count-num" type="number" id="bc" value="0" min="0" max="999">
+            <button class="count-btn" onclick="changeCount('bc', 1)">+</button>
+          </div>
+        </div>
+
+        <div class="truck-card">
+          <div class="truck-card-top">
+            <span class="truck-flag">🌾</span>
+            <div>
+              <div class="truck-city">Alberta</div>
+              <div class="truck-province">AB, Canada</div>
+            </div>
+          </div>
+          <div class="count-input-wrap">
+            <button class="count-btn" onclick="changeCount('alberta', -1)">−</button>
+            <input class="count-num" type="number" id="alberta" value="0" min="0" max="999">
+            <button class="count-btn" onclick="changeCount('alberta', 1)">+</button>
+          </div>
+        </div>
+
+        <div class="truck-card">
+          <div class="truck-card-top">
+            <span class="truck-flag">🏙️</span>
+            <div>
+              <div class="truck-city">Toronto</div>
+              <div class="truck-province">ON, Canada</div>
+            </div>
+          </div>
+          <div class="count-input-wrap">
+            <button class="count-btn" onclick="changeCount('toronto', -1)">−</button>
+            <input class="count-num" type="number" id="toronto" value="0" min="0" max="999">
+            <button class="count-btn" onclick="changeCount('toronto', 1)">+</button>
+          </div>
+        </div>
+
+        <div class="truck-card">
+          <div class="truck-card-top">
+            <span class="truck-flag">🌊</span>
+            <div>
+              <div class="truck-city">Surrey</div>
+              <div class="truck-province">BC, Canada</div>
+            </div>
+          </div>
+          <div class="count-input-wrap">
+            <button class="count-btn" onclick="changeCount('surrey', -1)">−</button>
+            <input class="count-num" type="number" id="surrey" value="0" min="0" max="999">
+            <button class="count-btn" onclick="changeCount('surrey', 1)">+</button>
+          </div>
+        </div>
+
+        <div class="truck-card">
+          <div class="truck-card-top">
+            <span class="truck-flag">🏔️</span>
+            <div>
+              <div class="truck-city">Calgary</div>
+              <div class="truck-province">AB, Canada</div>
+            </div>
+          </div>
+          <div class="count-input-wrap">
+            <button class="count-btn" onclick="changeCount('calgary', -1)">−</button>
+            <input class="count-num" type="number" id="calgary" value="0" min="0" max="999">
+            <button class="count-btn" onclick="changeCount('calgary', 1)">+</button>
+          </div>
+        </div>
+
+        <!-- Other City -->
+        <div class="truck-card">
+          <div class="truck-card-top">
+            <span class="truck-flag">📍</span>
+            <div>
+              <div class="truck-city">Other City</div>
+              <div class="truck-province">Specify below</div>
+            </div>
+          </div>
+          <div class="count-input-wrap">
+            <button class="count-btn" onclick="changeCount('other_count', -1)">−</button>
+            <input class="count-num" type="number" id="other_count" value="0" min="0" max="999">
+            <button class="count-btn" onclick="changeCount('other_count', 1)">+</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Other City Name -->
+      <div class="field">
+        <label for="other_city">📍 Other City Name <span style="color:#94a3b8;font-weight:400">(if applicable)</span></label>
+        <input type="text" id="other_city" placeholder="e.g. Vancouver, Edmonton, Winnipeg...">
+      </div>
+    </div>
+
+    <!-- SECTION 2: TRAILER TYPE -->
+    <div class="sec-head">
+      <div class="sec-num">2</div>
+      <div class="sec-title">🚚 What Kind of Trailer Do You Have?</div>
+    </div>
+    <div class="form-body">
+      <div class="trailer-grid">
+        <div class="trailer-chip">
+          <input type="checkbox" id="t_dry" name="trailer" value="Dry Van">
+          <label for="t_dry"><span class="ticon">📦</span> Dry Van</label>
+        </div>
+        <div class="trailer-chip">
+          <input type="checkbox" id="t_reefer" name="trailer" value="Reefer">
+          <label for="t_reefer"><span class="ticon">❄️</span> Reefer</label>
+        </div>
+        <div class="trailer-chip">
+          <input type="checkbox" id="t_flatbed" name="trailer" value="Flatbed">
+          <label for="t_flatbed"><span class="ticon">🛻</span> Flatbed</label>
+        </div>
+        <div class="trailer-chip">
+          <input type="checkbox" id="t_stepdeck" name="trailer" value="Step Deck">
+          <label for="t_stepdeck"><span class="ticon">📐</span> Step Deck</label>
+        </div>
+        <div class="trailer-chip">
+          <input type="checkbox" id="t_lowboy" name="trailer" value="Lowboy">
+          <label for="t_lowboy"><span class="ticon">⬇️</span> Lowboy</label>
+        </div>
+        <div class="trailer-chip">
+          <input type="checkbox" id="t_tanker" name="trailer" value="Tanker">
+          <label for="t_tanker"><span class="ticon">🛢️</span> Tanker</label>
+        </div>
+        <div class="trailer-chip">
+          <input type="checkbox" id="t_curtain" name="trailer" value="Curtain Side">
+          <label for="t_curtain"><span class="ticon">🔲</span> Curtain Side</label>
+        </div>
+        <div class="trailer-chip">
+          <input type="checkbox" id="t_conestoga" name="trailer" value="Conestoga">
+          <label for="t_conestoga"><span class="ticon">🚛</span> Conestoga</label>
+        </div>
+        <div class="trailer-chip">
+          <input type="checkbox" id="t_other" name="trailer" value="Other">
+          <label for="t_other"><span class="ticon">🔧</span> Other</label>
+        </div>
+      </div>
+
+      <div class="field" id="trailerOtherField" style="display:none">
+        <label for="trailer_other_text">Specify Trailer Type</label>
+        <input type="text" id="trailer_other_text" placeholder="e.g. Double Drop, RGN, Dump Trailer...">
+      </div>
+    </div>
+
+    <!-- SECTION 3: DESTINATION -->
+    <div class="sec-head">
+      <div class="sec-num">3</div>
+      <div class="sec-title">🗺️ Destination Details</div>
+    </div>
+    <div class="form-body">
+      <div class="field">
+        <label for="destination">Destination City / Province</label>
+        <input type="text" id="destination" placeholder="e.g. Vancouver, BC  |  Toronto, ON  |  Edmonton, AB">
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="field">
+        <label for="contact_name">Your Name <span style="color:#94a3b8;font-weight:400">(optional)</span></label>
+        <input type="text" id="contact_name" placeholder="e.g. Harpreet Singh">
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-area">
+      <p class="submit-note">
+        ✅ Your information will be sent directly to <strong>WhatsApp +1 (880) 546-4284</strong> — no app login required. Just tap the button below and it will open WhatsApp with everything filled in.
+      </p>
+      <button class="btn-submit" onclick="sendToWhatsApp()">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.551 4.113 1.516 5.842L0 24l6.291-1.497A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.003-1.371l-.359-.214-3.732.888.913-3.636-.235-.373A9.777 9.777 0 012.182 12C2.182 6.579 6.579 2.182 12 2.182S21.818 6.579 21.818 12 17.421 21.818 12 21.818z"/>
+        </svg>
+        Send via WhatsApp
+      </button>
+    </div>
+
+  </div>
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toast-msg">Opening WhatsApp...</span>
+</div>
+
+<script>
+  // ── COUNT BUTTONS ──
+  function changeCount(id, delta) {
+    const el = document.getElementById(id);
+    const val = parseInt(el.value) || 0;
+    el.value = Math.max(0, val + delta);
+  }
+
+  // ── SHOW OTHER TRAILER FIELD ──
+  document.getElementById('t_other').addEventListener('change', function() {
+    document.getElementById('trailerOtherField').style.display = this.checked ? 'flex' : 'none';
+    document.getElementById('trailerOtherField').style.flexDirection = 'column';
+  });
+
+  // ── TOAST ──
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toast-msg').textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  // ── SEND TO WHATSAPP ──
+  function sendToWhatsApp() {
+    const bc        = parseInt(document.getElementById('bc').value) || 0;
+    const alberta   = parseInt(document.getElementById('alberta').value) || 0;
+    const toronto   = parseInt(document.getElementById('toronto').value) || 0;
+    const surrey    = parseInt(document.getElementById('surrey').value) || 0;
+    const calgary   = parseInt(document.getElementById('calgary').value) || 0;
+    const otherCnt  = parseInt(document.getElementById('other_count').value) || 0;
+    const otherCity = document.getElementById('other_city').value.trim();
+    const destination = document.getElementById('destination').value.trim();
+    const contactName = document.getElementById('contact_name').value.trim();
+
+    // Collect selected trailers
+    const trailerChecks = document.querySelectorAll('input[name="trailer"]:checked');
+    let trailers = Array.from(trailerChecks).map(c => c.value);
+    if (trailers.includes('Other')) {
+      const customTrailer = document.getElementById('trailer_other_text').value.trim();
+      trailers = trailers.filter(t => t !== 'Other');
+      if (customTrailer) trailers.push(customTrailer);
+    }
+
+    // Validate
+    const totalTrucks = bc + alberta + toronto + surrey + calgary + otherCnt;
+    if (totalTrucks === 0) {
+      showToast('⚠️ Please enter at least 1 truck in any location.');
+      return;
+    }
+    if (trailers.length === 0) {
+      showToast('⚠️ Please select at least one trailer type.');
+      return;
+    }
+    if (!destination) {
+      showToast('⚠️ Please enter a destination city.');
+      return;
+    }
+
+    // Build message
+    let msg = '🚛 *TRUCK AVAILABILITY ENQUIRY*\n';
+    msg += '━━━━━━━━━━━━━━━━━━━━\n\n';
+
+    msg += '📍 *TRUCK LOCATIONS:*\n';
+    if (bc > 0)      msg += `  🍁 British Columbia (BC): *${bc} truck${bc>1?'s':''}*\n`;
+    if (alberta > 0) msg += `  🌾 Alberta (AB): *${alberta} truck${alberta>1?'s':''}*\n`;
+    if (toronto > 0) msg += `  🏙️ Toronto (ON): *${toronto} truck${toronto>1?'s':''}*\n`;
+    if (surrey > 0)  msg += `  🌊 Surrey (BC): *${surrey} truck${surrey>1?'s':''}*\n`;
+    if (calgary > 0) msg += `  🏔️ Calgary (AB): *${calgary} truck${calgary>1?'s':''}*\n`;
+    if (otherCnt > 0) {
+      const cityLabel = otherCity ? otherCity : 'Other City';
+      msg += `  📍 ${cityLabel}: *${otherCnt} truck${otherCnt>1?'s':''}*\n`;
+    }
+
+    msg += `\n  📊 *Total Trucks: ${totalTrucks}*\n\n`;
+
+    msg += '🚚 *TRAILER TYPE(S):*\n';
+    msg += `  ${trailers.join(', ')}\n\n`;
+
+    msg += '🗺️ *DESTINATION:*\n';
+    msg += `  ${destination}\n`;
+
+    if (contactName) {
+      msg += `\n👤 *CONTACT NAME:*\n  ${contactName}\n`;
+    }
+
+    msg += '\n━━━━━━━━━━━━━━━━━━━━\n';
+    msg += '_Sent via Truck Availability Form_';
+
+    const phone = '18805464284';
+    const encoded = encodeURIComponent(msg);
+    const url = `https://wa.me/${phone}?text=${encoded}`;
+
+    window.open(url, '_blank');
+    showToast('✅ Opening WhatsApp...');
+  }
+</script>
+</body>
+</html>
