@@ -3,609 +3,546 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Truck Availability Form</title>
+<title>Truck Availability Form — Canada</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0f1e3c;--teal:#0d7a6e;--teal2:#0a5f55;--teal-light:#e0f5f2;
+  --amber:#f59e0b;--red:#e53e3e;--light:#f0f4f8;--white:#fff;
+  --gray:#64748b;--border:#e2e8f0;--shadow:0 4px 24px rgba(15,30,60,.10);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans','Segoe UI',sans-serif;background:var(--light);min-height:100vh;color:#1e293b}
 
-  :root {
-    --navy: #0f1e3c;
-    --teal: #0d7a6e;
-    --teal2: #0a5f55;
-    --amber: #f59e0b;
-    --red: #e53e3e;
-    --light: #f4f7fb;
-    --white: #ffffff;
-    --gray: #64748b;
-    --border: #e2e8f0;
-    --shadow: 0 4px 24px rgba(15,30,60,0.10);
-  }
+/* HEADER */
+header{background:linear-gradient(135deg,#0f1e3c 0%,#1a3a6e 55%,#0d7a6e 100%);color:#fff;padding:2.5rem 1.5rem 3.5rem;text-align:center;position:relative;overflow:hidden}
+header::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:30px 30px;pointer-events:none}
+.hinner{position:relative;z-index:1}
+.hicon{width:72px;height:72px;margin:0 auto 1.2rem;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.2);border-radius:20px;display:flex;align-items:center;justify-content:center}
+header h1{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:800;letter-spacing:-.02em;margin-bottom:.5rem}
+header p{font-size:.93rem;opacity:.75;max-width:480px;margin:0 auto;line-height:1.65}
+.wabadge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(37,211,102,.18);border:1px solid rgba(37,211,102,.35);color:#6effa0;padding:.38rem 1.1rem;border-radius:100px;font-size:.76rem;font-weight:700;margin-top:1rem;letter-spacing:.04em}
 
-  html { scroll-behavior: smooth; }
+/* MAIN */
+main{max-width:820px;margin:-2rem auto 3rem;padding:0 1.25rem;position:relative;z-index:1}
+.card{background:var(--white);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
 
-  body {
-    font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
-    background: var(--light);
-    min-height: 100vh;
-    color: #1e293b;
-  }
+/* PROGRESS */
+.pbar{height:4px;background:var(--border)}
+.pfill{height:100%;background:linear-gradient(90deg,var(--teal),var(--amber));width:0%;transition:width .4s ease;border-radius:4px}
 
-  /* ── HEADER ── */
-  header {
-    background: linear-gradient(135deg, #0f1e3c 0%, #1a3a6e 60%, #0d7a6e 100%);
-    color: #fff;
-    padding: 2.5rem 1.5rem 3.5rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
-    background-size: 30px 30px;
-  }
-  .header-inner { position: relative; z-index: 1; }
-  .header-icon {
-    width: 70px; height: 70px; margin: 0 auto 1.2rem;
-    background: rgba(255,255,255,0.1);
-    border: 2px solid rgba(255,255,255,0.2);
-    border-radius: 20px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .header-icon svg { width: 36px; height: 36px; }
-  header h1 {
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    font-weight: 800; letter-spacing: -0.02em;
-    margin-bottom: 0.5rem;
-  }
-  header p {
-    font-size: 0.95rem; opacity: 0.75; max-width: 460px; margin: 0 auto;
-    line-height: 1.65;
-  }
-  .wa-badge {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    background: rgba(37,211,102,0.18); border: 1px solid rgba(37,211,102,0.35);
-    color: #6effa0; padding: 0.35rem 1rem; border-radius: 100px;
-    font-size: 0.76rem; font-weight: 700; margin-top: 1rem;
-    letter-spacing: 0.04em;
-  }
-  .wa-badge svg { width: 14px; height: 14px; }
+/* SECTION HEAD */
+.sh{background:linear-gradient(90deg,#f0f7ff,#e8f5f2);border-bottom:1.5px solid var(--border);border-top:1.5px solid var(--border);padding:.9rem 1.75rem;display:flex;align-items:center;gap:.7rem;margin-top:0}
+.sn{width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.st{font-size:.88rem;font-weight:700;color:var(--navy)}
 
-  /* ── MAIN CARD ── */
-  main {
-    max-width: 700px; margin: -2rem auto 3rem;
-    padding: 0 1.25rem;
-    position: relative; z-index: 1;
-  }
-  .card {
-    background: var(--white);
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-  }
+/* FORM BODY */
+.fb{padding:1.75rem}
 
-  /* ── SECTION HEADER ── */
-  .sec-head {
-    background: linear-gradient(90deg, #f0f7ff, #e8f5f2);
-    border-bottom: 1.5px solid var(--border);
-    padding: 1rem 1.75rem;
-    display: flex; align-items: center; gap: 0.7rem;
-  }
-  .sec-num {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: var(--navy); color: #fff;
-    font-size: 0.75rem; font-weight: 800;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .sec-title {
-    font-size: 0.88rem; font-weight: 700; color: var(--navy);
-    letter-spacing: 0.01em;
-  }
+/* TRUCK GRID */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;margin-bottom:1.25rem}
+.tc{border:1.5px solid var(--border);border-radius:14px;padding:1rem;background:#fafbff;transition:border-color .2s,box-shadow .2s}
+.tc:focus-within{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,122,110,.1);background:#fff}
+.tctop{display:flex;align-items:center;gap:.45rem;margin-bottom:.6rem}
+.tflag{font-size:1.2rem;line-height:1}
+.tcity{font-size:.79rem;font-weight:700;color:var(--navy)}
+.tprov{font-size:.67rem;color:var(--gray);font-weight:500}
+.cw{display:flex;align-items:center;gap:.4rem}
+.cb{width:29px;height:29px;border-radius:7px;border:1.5px solid var(--border);background:#fff;font-size:1rem;font-weight:700;color:var(--teal);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s,border-color .15s;line-height:1}
+.cb:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+.cn{flex:1;text-align:center;padding:.4rem;border:1.5px solid var(--border);border-radius:7px;font-size:.93rem;font-weight:700;color:var(--navy);background:#fff;outline:none;-moz-appearance:textfield;font-family:inherit}
+.cn::-webkit-inner-spin-button,.cn::-webkit-outer-spin-button{-webkit-appearance:none}
+.cn:focus{border-color:var(--teal);box-shadow:0 0 0 2px rgba(13,122,110,.1)}
 
-  /* ── FORM BODY ── */
-  .form-body { padding: 1.75rem; }
+/* AUTOCOMPLETE */
+.acw{position:relative}
+.aci{width:100%;padding:.65rem 1rem .65rem 2.4rem;border:1.5px solid var(--border);border-radius:10px;font-size:.87rem;font-family:inherit;color:#1e293b;background:#fff;outline:none;transition:border-color .2s,box-shadow .2s}
+.aci:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,122,110,.12)}
+.aci::placeholder{color:#b0bec5}
+.acico{position:absolute;left:10px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--gray)}
+.acl{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1.5px solid var(--teal);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.12);z-index:9999;max-height:220px;overflow-y:auto;display:none}
+.acl.open{display:block}
+.acitem{padding:.58rem 1rem;font-size:.82rem;cursor:pointer;display:flex;align-items:center;gap:.5rem;transition:background .12s}
+.acitem:hover,.acitem.hi{background:var(--teal-light)}
+.acitem .af{font-size:.95rem;flex-shrink:0}
+.acitem .an{font-weight:600;color:#1e293b}
+.acitem .ap{font-size:.7rem;color:var(--gray);margin-left:auto}
+.actags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}
+.acpill{display:inline-flex;align-items:center;gap:.3rem;background:var(--teal-light);border:1px solid #94d4cd;color:var(--teal2);padding:.26rem .72rem;border-radius:100px;font-size:.74rem;font-weight:600}
+.acpill button{background:none;border:none;cursor:pointer;color:var(--teal2);font-size:.85rem;line-height:1;padding:0 0 0 .1rem;font-weight:700}
+.acpill button:hover{color:var(--red)}
 
-  .field-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  .field-group.full { grid-template-columns: 1fr; }
+/* FIELDS */
+.field{display:flex;flex-direction:column;gap:.38rem;margin-bottom:.9rem}
+.field:last-child{margin-bottom:0}
+.field label{font-size:.77rem;font-weight:700;color:#374151}
+.field label .opt{color:#94a3b8;font-weight:400}
+input[type=text],textarea{width:100%;padding:.63rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-size:.87rem;font-family:inherit;color:#1e293b;background:#fff;outline:none;transition:border-color .2s,box-shadow .2s}
+input[type=text]:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,122,110,.12)}
+input::placeholder,textarea::placeholder{color:#b0bec5}
+textarea{resize:vertical;min-height:70px}
 
-  .field { display: flex; flex-direction: column; gap: 0.4rem; }
-  .field label {
-    font-size: 0.78rem; font-weight: 700; color: #374151;
-    display: flex; align-items: center; gap: 0.4rem;
-  }
-  .field label .flag {
-    font-size: 1rem; line-height: 1;
-  }
-  .field label .city-name {
-    flex: 1;
-  }
+/* TRAILER */
+.tcat{margin-bottom:1.2rem}
+.tcat:last-child{margin-bottom:0}
+.tcatlbl{font-size:.68rem;font-weight:800;color:var(--gray);letter-spacing:.07em;text-transform:uppercase;padding:.18rem 0;border-bottom:1px solid var(--border);margin-bottom:.5rem}
+.tchips{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.5rem}
+.chip input[type=checkbox]{display:none}
+.chip label{display:flex;align-items:center;gap:.42rem;padding:.5rem .8rem;border:1.5px solid var(--border);border-radius:9px;cursor:pointer;font-size:.74rem;font-weight:600;color:#374151;background:#fafbff;transition:all .15s;user-select:none}
+.chip label .ti{font-size:.95rem;flex-shrink:0}
+.chip input:checked+label{border-color:var(--teal);background:var(--teal-light);color:var(--teal2)}
+.chip label:hover{border-color:#94d4cd;background:#f0fbf9}
 
-  .input-wrap { position: relative; }
-  .input-wrap .unit {
-    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-    font-size: 0.72rem; font-weight: 600; color: var(--gray);
-    pointer-events: none;
-  }
+/* DIVIDER */
+.div{height:1.5px;background:var(--border);margin:1.25rem 0}
 
-  input[type="number"],
-  input[type="text"],
-  select,
-  textarea {
-    width: 100%;
-    padding: 0.65rem 1rem;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    font-size: 0.88rem;
-    font-family: inherit;
-    color: #1e293b;
-    background: #fff;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    -moz-appearance: textfield;
-  }
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--teal);
-    box-shadow: 0 0 0 3px rgba(13,122,110,0.12);
-  }
-  input::placeholder, textarea::placeholder { color: #b0bec5; }
-  textarea { resize: vertical; min-height: 80px; }
-  select { cursor: pointer; }
+/* SUBMIT */
+.subarea{padding:1.5rem 1.75rem;background:#f8faff;border-top:1.5px solid var(--border)}
+.subnote{font-size:.74rem;color:var(--gray);margin-bottom:1rem;line-height:1.6}
+.subnote strong{color:#25d366}
+.subbtn{width:100%;padding:.92rem;background:#25d366;color:#fff;border:none;border-radius:12px;font-size:.97rem;font-weight:800;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.6rem;transition:background .2s,transform .15s;box-shadow:0 4px 18px rgba(37,211,102,.35)}
+.subbtn:hover{background:#1da851;transform:translateY(-1px)}
+.subbtn:active{transform:translateY(0) scale(.98)}
 
-  /* ── TRUCK COUNT CARDS ── */
-  .truck-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  .truck-card {
-    border: 1.5px solid var(--border);
-    border-radius: 14px;
-    padding: 1.1rem 1rem;
-    background: #fafbff;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  .truck-card:focus-within {
-    border-color: var(--teal);
-    box-shadow: 0 0 0 3px rgba(13,122,110,0.10);
-    background: #fff;
-  }
-  .truck-card-top {
-    display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.65rem;
-  }
-  .truck-flag { font-size: 1.3rem; line-height: 1; }
-  .truck-city { font-size: 0.8rem; font-weight: 700; color: var(--navy); }
-  .truck-province { font-size: 0.68rem; color: var(--gray); font-weight: 500; margin-top: 1px; }
+/* TOAST */
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(100px);background:#0f1e3c;color:#fff;padding:.72rem 1.4rem;border-radius:50px;font-size:.82rem;font-weight:600;box-shadow:0 8px 32px rgba(0,0,0,.2);transition:transform .3s cubic-bezier(.34,1.56,.64,1);z-index:9999;white-space:nowrap;display:flex;align-items:center;gap:.5rem}
+.toast.show{transform:translateX(-50%) translateY(0)}
 
-  .count-input-wrap {
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .count-btn {
-    width: 32px; height: 32px; border-radius: 8px;
-    border: 1.5px solid var(--border); background: #fff;
-    font-size: 1.1rem; font-weight: 700; color: var(--teal);
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    transition: background 0.15s, border-color 0.15s;
-    flex-shrink: 0;
-  }
-  .count-btn:hover { background: var(--teal); color: #fff; border-color: var(--teal); }
-  .count-num {
-    flex: 1; text-align: center;
-    padding: 0.45rem 0.5rem;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    font-size: 1rem; font-weight: 700; color: var(--navy);
-    background: #fff;
-    outline: none;
-    transition: border-color 0.2s;
-    -moz-appearance: textfield;
-  }
-  .count-num::-webkit-inner-spin-button,
-  .count-num::-webkit-outer-spin-button { -webkit-appearance: none; }
-  .count-num:focus { border-color: var(--teal); box-shadow: 0 0 0 2px rgba(13,122,110,0.12); }
-
-  /* ── TRAILER CHIPS ── */
-  .trailer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 0.65rem;
-    margin-bottom: 1.2rem;
-  }
-  .trailer-chip input[type="checkbox"] { display: none; }
-  .trailer-chip label {
-    display: flex; align-items: center; gap: 0.5rem;
-    padding: 0.6rem 0.9rem; border: 1.5px solid var(--border);
-    border-radius: 10px; cursor: pointer; font-size: 0.78rem; font-weight: 600;
-    color: #374151; background: #fafbff;
-    transition: all 0.15s; user-select: none;
-  }
-  .trailer-chip label .ticon { font-size: 1.1rem; }
-  .trailer-chip input:checked + label {
-    border-color: var(--teal); background: #e0f5f2;
-    color: var(--teal2);
-  }
-  .trailer-chip label:hover { border-color: #94d4cd; background: #f0fbf9; }
-
-  /* ── DIVIDER ── */
-  .divider { height: 1.5px; background: var(--border); margin: 1.5rem 0; }
-
-  /* ── SUBMIT ── */
-  .submit-area { padding: 1.5rem 1.75rem; background: #f8faff; border-top: 1.5px solid var(--border); }
-  .submit-note { font-size: 0.75rem; color: var(--gray); margin-bottom: 1rem; line-height: 1.55; }
-  .submit-note strong { color: #25d366; }
-  .btn-submit {
-    width: 100%;
-    padding: 0.95rem;
-    background: #25d366;
-    color: #fff;
-    border: none; border-radius: 12px;
-    font-size: 1rem; font-weight: 800;
-    font-family: inherit;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-    transition: background 0.2s, transform 0.15s;
-    box-shadow: 0 4px 18px rgba(37,211,102,0.35);
-  }
-  .btn-submit:hover { background: #1da851; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(37,211,102,0.45); }
-  .btn-submit:active { transform: translateY(0) scale(0.98); }
-  .btn-submit svg { width: 22px; height: 22px; flex-shrink: 0; }
-
-  /* ── TOAST ── */
-  .toast {
-    position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(100px);
-    background: #0f1e3c; color: #fff;
-    padding: 0.75rem 1.5rem; border-radius: 50px;
-    font-size: 0.83rem; font-weight: 600;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    z-index: 9999; white-space: nowrap;
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); }
-
-  @media (max-width: 500px) {
-    .truck-grid { grid-template-columns: 1fr; }
-    .trailer-grid { grid-template-columns: repeat(2, 1fr); }
-    .field-group { grid-template-columns: 1fr; }
-    .form-body { padding: 1.25rem; }
-    .submit-area { padding: 1.25rem; }
-  }
+@media(max-width:560px){
+  .tgrid{grid-template-columns:1fr 1fr}
+  .tchips{grid-template-columns:1fr 1fr}
+  .fb{padding:1.2rem}
+  .subarea{padding:1.2rem}
+  .sh{padding:.85rem 1.2rem}
+}
+@media(max-width:360px){.tgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
-  <div class="header-inner">
-    <div class="header-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <div class="hinner">
+    <div class="hicon">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="1" y="3" width="15" height="13" rx="2"/>
         <path d="M16 8h4l3 5v4h-7V8z"/>
         <circle cx="5.5" cy="18.5" r="2.5"/>
         <circle cx="18.5" cy="18.5" r="2.5"/>
       </svg>
     </div>
-    <h1>Truck Availability Form</h1>
-    <p>Tell us where your trucks are located and what you're hauling — we'll match you with the right loads.</p>
-    <div class="wa-badge">
-      <svg viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.551 4.113 1.516 5.842L0 24l6.291-1.497A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.003-1.371l-.359-.214-3.732.888.913-3.636-.235-.373A9.777 9.777 0 012.182 12C2.182 6.579 6.579 2.182 12 2.182S21.818 6.579 21.818 12 17.421 21.818 12 21.818z"/>
-      </svg>
-      Sends directly to WhatsApp: +1 (880) 546-4284
+    <h1>🇨🇦 Truck Availability Form</h1>
+    <p>Enter your truck locations, trailer types &amp; destinations — your enquiry goes straight to WhatsApp.</p>
+    <div class="wabadge">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.551 4.113 1.516 5.842L0 24l6.291-1.497A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.003-1.371l-.359-.214-3.732.888.913-3.636-.235-.373A9.777 9.777 0 012.182 12C2.182 6.579 6.579 2.182 12 2.182S21.818 6.579 21.818 12 17.421 21.818 12 21.818z"/></svg>
+      Sends to WhatsApp: +1 (604) 897-9066
     </div>
   </div>
 </header>
 
-<!-- FORM -->
 <main>
-  <div class="card">
+<div class="card">
+<div class="pbar"><div class="pfill" id="pf"></div></div>
 
-    <!-- SECTION 1: TRUCK LOCATIONS -->
-    <div class="sec-head">
-      <div class="sec-num">1</div>
-      <div class="sec-title">🚛 How Many Trucks Do You Have in Each Location?</div>
-    </div>
-    <div class="form-body">
-      <div class="truck-grid">
-
-        <div class="truck-card">
-          <div class="truck-card-top">
-            <span class="truck-flag">🍁</span>
-            <div>
-              <div class="truck-city">British Columbia</div>
-              <div class="truck-province">BC, Canada</div>
-            </div>
-          </div>
-          <div class="count-input-wrap">
-            <button class="count-btn" onclick="changeCount('bc', -1)">−</button>
-            <input class="count-num" type="number" id="bc" value="0" min="0" max="999">
-            <button class="count-btn" onclick="changeCount('bc', 1)">+</button>
-          </div>
-        </div>
-
-        <div class="truck-card">
-          <div class="truck-card-top">
-            <span class="truck-flag">🌾</span>
-            <div>
-              <div class="truck-city">Alberta</div>
-              <div class="truck-province">AB, Canada</div>
-            </div>
-          </div>
-          <div class="count-input-wrap">
-            <button class="count-btn" onclick="changeCount('alberta', -1)">−</button>
-            <input class="count-num" type="number" id="alberta" value="0" min="0" max="999">
-            <button class="count-btn" onclick="changeCount('alberta', 1)">+</button>
-          </div>
-        </div>
-
-        <div class="truck-card">
-          <div class="truck-card-top">
-            <span class="truck-flag">🏙️</span>
-            <div>
-              <div class="truck-city">Toronto</div>
-              <div class="truck-province">ON, Canada</div>
-            </div>
-          </div>
-          <div class="count-input-wrap">
-            <button class="count-btn" onclick="changeCount('toronto', -1)">−</button>
-            <input class="count-num" type="number" id="toronto" value="0" min="0" max="999">
-            <button class="count-btn" onclick="changeCount('toronto', 1)">+</button>
-          </div>
-        </div>
-
-        <div class="truck-card">
-          <div class="truck-card-top">
-            <span class="truck-flag">🌊</span>
-            <div>
-              <div class="truck-city">Surrey</div>
-              <div class="truck-province">BC, Canada</div>
-            </div>
-          </div>
-          <div class="count-input-wrap">
-            <button class="count-btn" onclick="changeCount('surrey', -1)">−</button>
-            <input class="count-num" type="number" id="surrey" value="0" min="0" max="999">
-            <button class="count-btn" onclick="changeCount('surrey', 1)">+</button>
-          </div>
-        </div>
-
-        <div class="truck-card">
-          <div class="truck-card-top">
-            <span class="truck-flag">🏔️</span>
-            <div>
-              <div class="truck-city">Calgary</div>
-              <div class="truck-province">AB, Canada</div>
-            </div>
-          </div>
-          <div class="count-input-wrap">
-            <button class="count-btn" onclick="changeCount('calgary', -1)">−</button>
-            <input class="count-num" type="number" id="calgary" value="0" min="0" max="999">
-            <button class="count-btn" onclick="changeCount('calgary', 1)">+</button>
-          </div>
-        </div>
-
-        <!-- Other City -->
-        <div class="truck-card">
-          <div class="truck-card-top">
-            <span class="truck-flag">📍</span>
-            <div>
-              <div class="truck-city">Other City</div>
-              <div class="truck-province">Specify below</div>
-            </div>
-          </div>
-          <div class="count-input-wrap">
-            <button class="count-btn" onclick="changeCount('other_count', -1)">−</button>
-            <input class="count-num" type="number" id="other_count" value="0" min="0" max="999">
-            <button class="count-btn" onclick="changeCount('other_count', 1)">+</button>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Other City Name -->
-      <div class="field">
-        <label for="other_city">📍 Other City Name <span style="color:#94a3b8;font-weight:400">(if applicable)</span></label>
-        <input type="text" id="other_city" placeholder="e.g. Vancouver, Edmonton, Winnipeg...">
-      </div>
-    </div>
-
-    <!-- SECTION 2: TRAILER TYPE -->
-    <div class="sec-head">
-      <div class="sec-num">2</div>
-      <div class="sec-title">🚚 What Kind of Trailer Do You Have?</div>
-    </div>
-    <div class="form-body">
-      <div class="trailer-grid">
-        <div class="trailer-chip">
-          <input type="checkbox" id="t_dry" name="trailer" value="Dry Van">
-          <label for="t_dry"><span class="ticon">📦</span> Dry Van</label>
-        </div>
-        <div class="trailer-chip">
-          <input type="checkbox" id="t_reefer" name="trailer" value="Reefer">
-          <label for="t_reefer"><span class="ticon">❄️</span> Reefer</label>
-        </div>
-        <div class="trailer-chip">
-          <input type="checkbox" id="t_flatbed" name="trailer" value="Flatbed">
-          <label for="t_flatbed"><span class="ticon">🛻</span> Flatbed</label>
-        </div>
-        <div class="trailer-chip">
-          <input type="checkbox" id="t_stepdeck" name="trailer" value="Step Deck">
-          <label for="t_stepdeck"><span class="ticon">📐</span> Step Deck</label>
-        </div>
-        <div class="trailer-chip">
-          <input type="checkbox" id="t_lowboy" name="trailer" value="Lowboy">
-          <label for="t_lowboy"><span class="ticon">⬇️</span> Lowboy</label>
-        </div>
-        <div class="trailer-chip">
-          <input type="checkbox" id="t_tanker" name="trailer" value="Tanker">
-          <label for="t_tanker"><span class="ticon">🛢️</span> Tanker</label>
-        </div>
-        <div class="trailer-chip">
-          <input type="checkbox" id="t_curtain" name="trailer" value="Curtain Side">
-          <label for="t_curtain"><span class="ticon">🔲</span> Curtain Side</label>
-        </div>
-        <div class="trailer-chip">
-          <input type="checkbox" id="t_conestoga" name="trailer" value="Conestoga">
-          <label for="t_conestoga"><span class="ticon">🚛</span> Conestoga</label>
-        </div>
-        <div class="trailer-chip">
-          <input type="checkbox" id="t_other" name="trailer" value="Other">
-          <label for="t_other"><span class="ticon">🔧</span> Other</label>
-        </div>
-      </div>
-
-      <div class="field" id="trailerOtherField" style="display:none">
-        <label for="trailer_other_text">Specify Trailer Type</label>
-        <input type="text" id="trailer_other_text" placeholder="e.g. Double Drop, RGN, Dump Trailer...">
-      </div>
-    </div>
-
-    <!-- SECTION 3: DESTINATION -->
-    <div class="sec-head">
-      <div class="sec-num">3</div>
-      <div class="sec-title">🗺️ Destination Details</div>
-    </div>
-    <div class="form-body">
-      <div class="field">
-        <label for="destination">Destination City / Province</label>
-        <input type="text" id="destination" placeholder="e.g. Vancouver, BC  |  Toronto, ON  |  Edmonton, AB">
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="field">
-        <label for="contact_name">Your Name <span style="color:#94a3b8;font-weight:400">(optional)</span></label>
-        <input type="text" id="contact_name" placeholder="e.g. Harpreet Singh">
-      </div>
-    </div>
-
-    <!-- SUBMIT -->
-    <div class="submit-area">
-      <p class="submit-note">
-        ✅ Your information will be sent directly to <strong>WhatsApp +1 (880) 546-4284</strong> — no app login required. Just tap the button below and it will open WhatsApp with everything filled in.
-      </p>
-      <button class="btn-submit" onclick="sendToWhatsApp()">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.551 4.113 1.516 5.842L0 24l6.291-1.497A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.003-1.371l-.359-.214-3.732.888.913-3.636-.235-.373A9.777 9.777 0 012.182 12C2.182 6.579 6.579 2.182 12 2.182S21.818 6.579 21.818 12 17.421 21.818 12 21.818z"/>
-        </svg>
-        Send via WhatsApp
-      </button>
-    </div>
-
+<!-- ═══ SECTION 1: SOURCE ═══ -->
+<div class="sh"><div class="sn">1</div><div class="st">📍 Source — Where Are Your Trucks Now?</div></div>
+<div class="fb">
+  <div class="tgrid">
+    <!-- BC -->
+    <div class="tc"><div class="tctop"><span class="tflag">🌊</span><div><div class="tcity">Vancouver</div><div class="tprov">BC</div></div></div><div class="cw"><button class="cb" onclick="cc('vancouver',-1)">−</button><input class="cn" type="number" id="vancouver" value="0" min="0"><button class="cb" onclick="cc('vancouver',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🏙️</span><div><div class="tcity">Surrey</div><div class="tprov">BC</div></div></div><div class="cw"><button class="cb" onclick="cc('surrey',-1)">−</button><input class="cn" type="number" id="surrey" value="0" min="0"><button class="cb" onclick="cc('surrey',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🌲</span><div><div class="tcity">Abbotsford</div><div class="tprov">BC</div></div></div><div class="cw"><button class="cb" onclick="cc('abbotsford',-1)">−</button><input class="cn" type="number" id="abbotsford" value="0" min="0"><button class="cb" onclick="cc('abbotsford',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🏘️</span><div><div class="tcity">Burnaby</div><div class="tprov">BC</div></div></div><div class="cw"><button class="cb" onclick="cc('burnaby',-1)">−</button><input class="cn" type="number" id="burnaby" value="0" min="0"><button class="cb" onclick="cc('burnaby',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🌿</span><div><div class="tcity">Richmond</div><div class="tprov">BC</div></div></div><div class="cw"><button class="cb" onclick="cc('richmond',-1)">−</button><input class="cn" type="number" id="richmond" value="0" min="0"><button class="cb" onclick="cc('richmond',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🏔️</span><div><div class="tcity">Kelowna</div><div class="tprov">BC</div></div></div><div class="cw"><button class="cb" onclick="cc('kelowna',-1)">−</button><input class="cn" type="number" id="kelowna" value="0" min="0"><button class="cb" onclick="cc('kelowna',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🏔️</span><div><div class="tcity">Kamloops</div><div class="tprov">BC</div></div></div><div class="cw"><button class="cb" onclick="cc('kamloops',-1)">−</button><input class="cn" type="number" id="kamloops" value="0" min="0"><button class="cb" onclick="cc('kamloops',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🌲</span><div><div class="tcity">Prince George</div><div class="tprov">BC</div></div></div><div class="cw"><button class="cb" onclick="cc('princegeorge',-1)">−</button><input class="cn" type="number" id="princegeorge" value="0" min="0"><button class="cb" onclick="cc('princegeorge',1)">+</button></div></div>
+    <!-- AB -->
+    <div class="tc"><div class="tctop"><span class="tflag">🌾</span><div><div class="tcity">Calgary</div><div class="tprov">AB</div></div></div><div class="cw"><button class="cb" onclick="cc('calgary',-1)">−</button><input class="cn" type="number" id="calgary" value="0" min="0"><button class="cb" onclick="cc('calgary',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🏞️</span><div><div class="tcity">Edmonton</div><div class="tprov">AB</div></div></div><div class="cw"><button class="cb" onclick="cc('edmonton',-1)">−</button><input class="cn" type="number" id="edmonton" value="0" min="0"><button class="cb" onclick="cc('edmonton',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🦌</span><div><div class="tcity">Red Deer</div><div class="tprov">AB</div></div></div><div class="cw"><button class="cb" onclick="cc('reddeer',-1)">−</button><input class="cn" type="number" id="reddeer" value="0" min="0"><button class="cb" onclick="cc('reddeer',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🌻</span><div><div class="tcity">Lethbridge</div><div class="tprov">AB</div></div></div><div class="cw"><button class="cb" onclick="cc('lethbridge',-1)">−</button><input class="cn" type="number" id="lethbridge" value="0" min="0"><button class="cb" onclick="cc('lethbridge',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">⛽</span><div><div class="tcity">Fort McMurray</div><div class="tprov">AB</div></div></div><div class="cw"><button class="cb" onclick="cc('fortmcmurray',-1)">−</button><input class="cn" type="number" id="fortmcmurray" value="0" min="0"><button class="cb" onclick="cc('fortmcmurray',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🌲</span><div><div class="tcity">Grande Prairie</div><div class="tprov">AB</div></div></div><div class="cw"><button class="cb" onclick="cc('grandeprairie',-1)">−</button><input class="cn" type="number" id="grandeprairie" value="0" min="0"><button class="cb" onclick="cc('grandeprairie',1)">+</button></div></div>
+    <!-- SK -->
+    <div class="tc"><div class="tctop"><span class="tflag">🌾</span><div><div class="tcity">Saskatoon</div><div class="tprov">SK</div></div></div><div class="cw"><button class="cb" onclick="cc('saskatoon',-1)">−</button><input class="cn" type="number" id="saskatoon" value="0" min="0"><button class="cb" onclick="cc('saskatoon',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🌿</span><div><div class="tcity">Regina</div><div class="tprov">SK</div></div></div><div class="cw"><button class="cb" onclick="cc('regina',-1)">−</button><input class="cn" type="number" id="regina" value="0" min="0"><button class="cb" onclick="cc('regina',1)">+</button></div></div>
+    <!-- MB -->
+    <div class="tc"><div class="tctop"><span class="tflag">🍁</span><div><div class="tcity">Winnipeg</div><div class="tprov">MB</div></div></div><div class="cw"><button class="cb" onclick="cc('winnipeg',-1)">−</button><input class="cn" type="number" id="winnipeg" value="0" min="0"><button class="cb" onclick="cc('winnipeg',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🌾</span><div><div class="tcity">Brandon</div><div class="tprov">MB</div></div></div><div class="cw"><button class="cb" onclick="cc('brandon',-1)">−</button><input class="cn" type="number" id="brandon" value="0" min="0"><button class="cb" onclick="cc('brandon',1)">+</button></div></div>
+    <!-- ON -->
+    <div class="tc"><div class="tctop"><span class="tflag">🏙️</span><div><div class="tcity">Toronto</div><div class="tprov">ON</div></div></div><div class="cw"><button class="cb" onclick="cc('toronto',-1)">−</button><input class="cn" type="number" id="toronto" value="0" min="0"><button class="cb" onclick="cc('toronto',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🌊</span><div><div class="tcity">Mississauga</div><div class="tprov">ON</div></div></div><div class="cw"><button class="cb" onclick="cc('mississauga',-1)">−</button><input class="cn" type="number" id="mississauga" value="0" min="0"><button class="cb" onclick="cc('mississauga',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🏭</span><div><div class="tcity">Brampton</div><div class="tprov">ON</div></div></div><div class="cw"><button class="cb" onclick="cc('brampton',-1)">−</button><input class="cn" type="number" id="brampton" value="0" min="0"><button class="cb" onclick="cc('brampton',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🏛️</span><div><div class="tcity">Ottawa</div><div class="tprov">ON</div></div></div><div class="cw"><button class="cb" onclick="cc('ottawa',-1)">−</button><input class="cn" type="number" id="ottawa" value="0" min="0"><button class="cb" onclick="cc('ottawa',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🌐</span><div><div class="tcity">Hamilton</div><div class="tprov">ON</div></div></div><div class="cw"><button class="cb" onclick="cc('hamilton',-1)">−</button><input class="cn" type="number" id="hamilton" value="0" min="0"><button class="cb" onclick="cc('hamilton',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🔵</span><div><div class="tcity">London</div><div class="tprov">ON</div></div></div><div class="cw"><button class="cb" onclick="cc('london',-1)">−</button><input class="cn" type="number" id="london" value="0" min="0"><button class="cb" onclick="cc('london',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🌉</span><div><div class="tcity">Windsor</div><div class="tprov">ON</div></div></div><div class="cw"><button class="cb" onclick="cc('windsor',-1)">−</button><input class="cn" type="number" id="windsor" value="0" min="0"><button class="cb" onclick="cc('windsor',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🏭</span><div><div class="tcity">Kitchener</div><div class="tprov">ON</div></div></div><div class="cw"><button class="cb" onclick="cc('kitchener',-1)">−</button><input class="cn" type="number" id="kitchener" value="0" min="0"><button class="cb" onclick="cc('kitchener',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">⛵</span><div><div class="tcity">Barrie</div><div class="tprov">ON</div></div></div><div class="cw"><button class="cb" onclick="cc('barrie',-1)">−</button><input class="cn" type="number" id="barrie" value="0" min="0"><button class="cb" onclick="cc('barrie',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">⛈️</span><div><div class="tcity">Thunder Bay</div><div class="tprov">ON</div></div></div><div class="cw"><button class="cb" onclick="cc('thunderbay',-1)">−</button><input class="cn" type="number" id="thunderbay" value="0" min="0"><button class="cb" onclick="cc('thunderbay',1)">+</button></div></div>
+    <!-- QC -->
+    <div class="tc"><div class="tctop"><span class="tflag">⚜️</span><div><div class="tcity">Montréal</div><div class="tprov">QC</div></div></div><div class="cw"><button class="cb" onclick="cc('montreal',-1)">−</button><input class="cn" type="number" id="montreal" value="0" min="0"><button class="cb" onclick="cc('montreal',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🏰</span><div><div class="tcity">Québec City</div><div class="tprov">QC</div></div></div><div class="cw"><button class="cb" onclick="cc('quebec',-1)">−</button><input class="cn" type="number" id="quebec" value="0" min="0"><button class="cb" onclick="cc('quebec',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🌿</span><div><div class="tcity">Laval</div><div class="tprov">QC</div></div></div><div class="cw"><button class="cb" onclick="cc('laval',-1)">−</button><input class="cn" type="number" id="laval" value="0" min="0"><button class="cb" onclick="cc('laval',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🌲</span><div><div class="tcity">Sherbrooke</div><div class="tprov">QC</div></div></div><div class="cw"><button class="cb" onclick="cc('sherbrooke',-1)">−</button><input class="cn" type="number" id="sherbrooke" value="0" min="0"><button class="cb" onclick="cc('sherbrooke',1)">+</button></div></div>
+    <!-- East -->
+    <div class="tc"><div class="tctop"><span class="tflag">🌊</span><div><div class="tcity">Halifax</div><div class="tprov">NS</div></div></div><div class="cw"><button class="cb" onclick="cc('halifax',-1)">−</button><input class="cn" type="number" id="halifax" value="0" min="0"><button class="cb" onclick="cc('halifax',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🌲</span><div><div class="tcity">Moncton</div><div class="tprov">NB</div></div></div><div class="cw"><button class="cb" onclick="cc('moncton',-1)">−</button><input class="cn" type="number" id="moncton" value="0" min="0"><button class="cb" onclick="cc('moncton',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">⚓</span><div><div class="tcity">Saint John</div><div class="tprov">NB</div></div></div><div class="cw"><button class="cb" onclick="cc('saintjohn',-1)">−</button><input class="cn" type="number" id="saintjohn" value="0" min="0"><button class="cb" onclick="cc('saintjohn',1)">+</button></div></div>
+    <div class="tc"><div class="tctop"><span class="tflag">🌊</span><div><div class="tcity">St. John's</div><div class="tprov">NL</div></div></div><div class="cw"><button class="cb" onclick="cc('stjohns',-1)">−</button><input class="cn" type="number" id="stjohns" value="0" min="0"><button class="cb" onclick="cc('stjohns',1)">+</button></div></div>
   </div>
+
+  <!-- Other source city autocomplete -->
+  <div class="field">
+    <label>📍 Other City — search &amp; add</label>
+    <div class="acw">
+      <span class="acico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+      <input class="aci" id="srcIn" placeholder="Search Canadian city..." autocomplete="off">
+      <div class="acl" id="srcList"></div>
+    </div>
+    <div class="actags" id="srcTags"></div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 2: DESTINATION ═══ -->
+<div class="sh"><div class="sn">2</div><div class="st">🗺️ Destination — Where Are Trucks Headed?</div></div>
+<div class="fb">
+  <div class="field">
+    <label>Search &amp; add destination cities</label>
+    <div class="acw">
+      <span class="acico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+      <input class="aci" id="destIn" placeholder="Search Canadian city..." autocomplete="off">
+      <div class="acl" id="destList"></div>
+    </div>
+    <div class="actags" id="destTags"></div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 3: TRAILER TYPE ═══ -->
+<div class="sh"><div class="sn">3</div><div class="st">🚚 What Kind of Trailer Do You Have?</div></div>
+<div class="fb">
+
+  <div class="tcat">
+    <div class="tcatlbl">📦 Enclosed / Dry Freight</div>
+    <div class="tchips">
+      <div class="chip"><input type="checkbox" id="t1" value="Dry Van 53ft"><label for="t1"><span class="ti">📦</span>Dry Van 53ft</label></div>
+      <div class="chip"><input type="checkbox" id="t2" value="Dry Van 48ft"><label for="t2"><span class="ti">📦</span>Dry Van 48ft</label></div>
+      <div class="chip"><input type="checkbox" id="t3" value="Reefer 53ft"><label for="t3"><span class="ti">❄️</span>Reefer 53ft</label></div>
+      <div class="chip"><input type="checkbox" id="t4" value="Reefer 48ft"><label for="t4"><span class="ti">❄️</span>Reefer 48ft</label></div>
+      <div class="chip"><input type="checkbox" id="t5" value="Heated Trailer"><label for="t5"><span class="ti">🔥</span>Heated Trailer</label></div>
+      <div class="chip"><input type="checkbox" id="t6" value="Insulated Van"><label for="t6"><span class="ti">🧊</span>Insulated Van</label></div>
+      <div class="chip"><input type="checkbox" id="t7" value="Curtain Side"><label for="t7"><span class="ti">🔲</span>Curtain Side</label></div>
+      <div class="chip"><input type="checkbox" id="t8" value="Cargo Van"><label for="t8"><span class="ti">🚐</span>Cargo Van</label></div>
+      <div class="chip"><input type="checkbox" id="t9" value="Box Truck"><label for="t9"><span class="ti">📫</span>Box Truck</label></div>
+    </div>
+  </div>
+
+  <div class="tcat">
+    <div class="tcatlbl">🛻 Open / Flatbed</div>
+    <div class="tchips">
+      <div class="chip"><input type="checkbox" id="t10" value="Flatbed 53ft"><label for="t10"><span class="ti">🛻</span>Flatbed 53ft</label></div>
+      <div class="chip"><input type="checkbox" id="t11" value="Flatbed 48ft"><label for="t11"><span class="ti">🛻</span>Flatbed 48ft</label></div>
+      <div class="chip"><input type="checkbox" id="t12" value="Step Deck"><label for="t12"><span class="ti">📐</span>Step Deck</label></div>
+      <div class="chip"><input type="checkbox" id="t13" value="Step Deck with Ramps"><label for="t13"><span class="ti">🪜</span>Step Deck + Ramps</label></div>
+      <div class="chip"><input type="checkbox" id="t14" value="Double Drop"><label for="t14"><span class="ti">⬇️</span>Double Drop</label></div>
+      <div class="chip"><input type="checkbox" id="t15" value="Lowboy"><label for="t15"><span class="ti">🔽</span>Lowboy</label></div>
+      <div class="chip"><input type="checkbox" id="t16" value="Lowbed"><label for="t16"><span class="ti">⬛</span>Lowbed</label></div>
+      <div class="chip"><input type="checkbox" id="t17" value="Conestoga"><label for="t17"><span class="ti">🚛</span>Conestoga</label></div>
+      <div class="chip"><input type="checkbox" id="t18" value="RGN (Removable Gooseneck)"><label for="t18"><span class="ti">🔩</span>RGN</label></div>
+      <div class="chip"><input type="checkbox" id="t19" value="Stretch Flatbed"><label for="t19"><span class="ti">↔️</span>Stretch Flatbed</label></div>
+      <div class="chip"><input type="checkbox" id="t20" value="Extendable Flatbed"><label for="t20"><span class="ti">📏</span>Extendable Flat</label></div>
+      <div class="chip"><input type="checkbox" id="t21" value="Tarp Flatbed"><label for="t21"><span class="ti">🎪</span>Tarp Flatbed</label></div>
+      <div class="chip"><input type="checkbox" id="t22" value="Side Kit Flatbed"><label for="t22"><span class="ti">📋</span>Side Kit</label></div>
+    </div>
+  </div>
+
+  <div class="tcat">
+    <div class="tcatlbl">🛢️ Liquid / Bulk / Tanker</div>
+    <div class="tchips">
+      <div class="chip"><input type="checkbox" id="t23" value="Tanker — Liquid"><label for="t23"><span class="ti">🛢️</span>Tanker (Liquid)</label></div>
+      <div class="chip"><input type="checkbox" id="t24" value="Tanker — Dry Bulk"><label for="t24"><span class="ti">🏺</span>Tanker (Dry Bulk)</label></div>
+      <div class="chip"><input type="checkbox" id="t25" value="Pneumatic Tanker"><label for="t25"><span class="ti">💨</span>Pneumatic</label></div>
+      <div class="chip"><input type="checkbox" id="t26" value="Fuel Tanker"><label for="t26"><span class="ti">⛽</span>Fuel Tanker</label></div>
+      <div class="chip"><input type="checkbox" id="t27" value="Chemical Tanker"><label for="t27"><span class="ti">⚗️</span>Chemical Tanker</label></div>
+      <div class="chip"><input type="checkbox" id="t28" value="Grain Hopper"><label for="t28"><span class="ti">🌾</span>Grain Hopper</label></div>
+    </div>
+  </div>
+
+  <div class="tcat">
+    <div class="tcatlbl">🪨 Dump / Aggregate</div>
+    <div class="tchips">
+      <div class="chip"><input type="checkbox" id="t29" value="End Dump"><label for="t29"><span class="ti">🚜</span>End Dump</label></div>
+      <div class="chip"><input type="checkbox" id="t30" value="Belly Dump"><label for="t30"><span class="ti">🪨</span>Belly Dump</label></div>
+      <div class="chip"><input type="checkbox" id="t31" value="Side Dump"><label for="t31"><span class="ti">↙️</span>Side Dump</label></div>
+      <div class="chip"><input type="checkbox" id="t32" value="Live Bottom"><label for="t32"><span class="ti">⚙️</span>Live Bottom</label></div>
+      <div class="chip"><input type="checkbox" id="t33" value="Super B Grain"><label for="t33"><span class="ti">🌻</span>Super B Grain</label></div>
+    </div>
+  </div>
+
+  <div class="tcat">
+    <div class="tcatlbl">🚗 Auto / Heavy Haul / Oversize</div>
+    <div class="tchips">
+      <div class="chip"><input type="checkbox" id="t34" value="Car Hauler (Auto Transport)"><label for="t34"><span class="ti">🚗</span>Car Hauler</label></div>
+      <div class="chip"><input type="checkbox" id="t35" value="Heavy Haul (Oversize)"><label for="t35"><span class="ti">⚠️</span>Heavy Haul</label></div>
+      <div class="chip"><input type="checkbox" id="t36" value="Multi-Axle Trailer"><label for="t36"><span class="ti">🔧</span>Multi-Axle</label></div>
+      <div class="chip"><input type="checkbox" id="t37" value="Modular Trailer"><label for="t37"><span class="ti">🔲</span>Modular</label></div>
+    </div>
+  </div>
+
+  <div class="tcat">
+    <div class="tcatlbl">🔗 B-Train / Pup / Combo</div>
+    <div class="tchips">
+      <div class="chip"><input type="checkbox" id="t38" value="B-Train"><label for="t38"><span class="ti">🚛</span>B-Train</label></div>
+      <div class="chip"><input type="checkbox" id="t39" value="Pup Trailer"><label for="t39"><span class="ti">🔗</span>Pup Trailer</label></div>
+      <div class="chip"><input type="checkbox" id="t40" value="A-Train"><label for="t40"><span class="ti">🔗</span>A-Train</label></div>
+      <div class="chip"><input type="checkbox" id="t41" value="Rocky Mountain Double"><label for="t41"><span class="ti">🏔️</span>Rocky Mtn Double</label></div>
+      <div class="chip"><input type="checkbox" id="t42" value="Intermodal Container (20ft)"><label for="t42"><span class="ti">🚢</span>Container 20ft</label></div>
+      <div class="chip"><input type="checkbox" id="t43" value="Intermodal Container (40ft)"><label for="t43"><span class="ti">🚢</span>Container 40ft</label></div>
+    </div>
+  </div>
+
+  <div class="tcat">
+    <div class="tcatlbl">🏗️ Specialized</div>
+    <div class="tchips">
+      <div class="chip"><input type="checkbox" id="t44" value="Livestock Trailer"><label for="t44"><span class="ti">🐄</span>Livestock</label></div>
+      <div class="chip"><input type="checkbox" id="t45" value="Logging Trailer"><label for="t45"><span class="ti">🪵</span>Logging</label></div>
+      <div class="chip"><input type="checkbox" id="t46" value="Chip Trailer"><label for="t46"><span class="ti">🌿</span>Chip Trailer</label></div>
+      <div class="chip"><input type="checkbox" id="t47" value="Van with Liftgate"><label for="t47"><span class="ti">🏗️</span>Van + Liftgate</label></div>
+      <div class="chip"><input type="checkbox" id="t48" value="Flatbed with Crane"><label for="t48"><span class="ti">🏗️</span>Flatbed + Crane</label></div>
+      <div class="chip"><input type="checkbox" id="t49" value="Overwidth Trailer"><label for="t49"><span class="ti">↔️</span>Overwidth</label></div>
+      <div class="chip"><input type="checkbox" id="t50" value="Other (specify)"><label for="t50"><span class="ti">🔧</span>Other</label></div>
+    </div>
+  </div>
+
+  <div class="field" id="tOtherWrap" style="display:none;margin-top:.75rem">
+    <label for="tOtherText">Specify other trailer type</label>
+    <input type="text" id="tOtherText" placeholder="e.g. Pump Truck, Vacuum Trailer, Lowbed Extendable...">
+  </div>
+</div>
+
+<!-- ═══ SECTION 4: CONTACT ═══ -->
+<div class="sh"><div class="sn">4</div><div class="st">📝 Additional Info</div></div>
+<div class="fb">
+  <div class="field">
+    <label for="cname">Your Name <span class="opt">(optional)</span></label>
+    <input type="text" id="cname" placeholder="e.g. Harpreet Singh">
+  </div>
+  <div class="field">
+    <label for="cphone">Your Phone / WhatsApp <span class="opt">(optional)</span></label>
+    <input type="text" id="cphone" placeholder="e.g. +1 604 000 0000">
+  </div>
+  <div class="field">
+    <label for="cnotes">Any Other Notes</label>
+    <textarea id="cnotes" placeholder="e.g. trucks available Monday, max payload, special requirements..."></textarea>
+  </div>
+</div>
+
+<!-- SUBMIT -->
+<div class="subarea">
+  <p class="subnote">✅ Tap below — your details will be pre-filled and sent directly to <strong>+1 (604) 897-9066</strong> via WhatsApp. No login needed.</p>
+  <button class="subbtn" onclick="sendWA()">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.551 4.113 1.516 5.842L0 24l6.291-1.497A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.003-1.371l-.359-.214-3.732.888.913-3.636-.235-.373A9.777 9.777 0 012.182 12C2.182 6.579 6.579 2.182 12 2.182S21.818 6.579 21.818 12 17.421 21.818 12 21.818z"/></svg>
+    Send via WhatsApp — +1 (604) 897-9066
+  </button>
+</div>
+</div>
 </main>
 
-<!-- TOAST -->
 <div class="toast" id="toast">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-  <span id="toast-msg">Opening WhatsApp...</span>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="tmsg">Done!</span>
 </div>
 
 <script>
-  // ── COUNT BUTTONS ──
-  function changeCount(id, delta) {
-    const el = document.getElementById(id);
-    const val = parseInt(el.value) || 0;
-    el.value = Math.max(0, val + delta);
-  }
+// ── ALL CANADIAN CITIES ──
+const CITIES=[
+  {n:'Vancouver',p:'BC',f:'🌊'},{n:'Surrey',p:'BC',f:'🏙️'},{n:'Burnaby',p:'BC',f:'🌲'},{n:'Richmond',p:'BC',f:'🌿'},
+  {n:'Abbotsford',p:'BC',f:'🌲'},{n:'Coquitlam',p:'BC',f:'🏘️'},{n:'Kelowna',p:'BC',f:'🏔️'},{n:'Langley',p:'BC',f:'🌾'},
+  {n:'Delta',p:'BC',f:'🌊'},{n:'Nanaimo',p:'BC',f:'⛵'},{n:'Kamloops',p:'BC',f:'🏔️'},{n:'Prince George',p:'BC',f:'🌲'},
+  {n:'Vernon',p:'BC',f:'🍎'},{n:'Penticton',p:'BC',f:'🍑'},{n:'Chilliwack',p:'BC',f:'🌿'},{n:'Port Moody',p:'BC',f:'🌊'},
+  {n:'New Westminster',p:'BC',f:'🏛️'},{n:'Maple Ridge',p:'BC',f:'🍁'},{n:'Cranbrook',p:'BC',f:'⛰️'},{n:'Fort St. John',p:'BC',f:'🌲'},
+  {n:'Prince Rupert',p:'BC',f:'⛵'},{n:'Williams Lake',p:'BC',f:'🌲'},{n:'Terrace',p:'BC',f:'🌲'},
+  {n:'Calgary',p:'AB',f:'🌾'},{n:'Edmonton',p:'AB',f:'🏞️'},{n:'Red Deer',p:'AB',f:'🦌'},{n:'Lethbridge',p:'AB',f:'🌻'},
+  {n:'St. Albert',p:'AB',f:'🌿'},{n:'Medicine Hat',p:'AB',f:'💊'},{n:'Grande Prairie',p:'AB',f:'🌲'},
+  {n:'Airdrie',p:'AB',f:'🌾'},{n:'Spruce Grove',p:'AB',f:'🌲'},{n:'Fort McMurray',p:'AB',f:'⛽'},
+  {n:'Sherwood Park',p:'AB',f:'🏡'},{n:'Okotoks',p:'AB',f:'🏔️'},{n:'Lloydminster',p:'AB',f:'🌾'},
+  {n:'Saskatoon',p:'SK',f:'🌾'},{n:'Regina',p:'SK',f:'🌿'},{n:'Prince Albert',p:'SK',f:'👑'},
+  {n:'Moose Jaw',p:'SK',f:'🦌'},{n:'Swift Current',p:'SK',f:'💨'},{n:'Yorkton',p:'SK',f:'🌾'},
+  {n:'North Battleford',p:'SK',f:'🌲'},{n:'Weyburn',p:'SK',f:'🌻'},{n:'Estevan',p:'SK',f:'⛽'},
+  {n:'Winnipeg',p:'MB',f:'🍁'},{n:'Brandon',p:'MB',f:'🌾'},{n:'Steinbach',p:'MB',f:'🌿'},
+  {n:'Thompson',p:'MB',f:'❄️'},{n:'Portage la Prairie',p:'MB',f:'🌾'},{n:'Selkirk',p:'MB',f:'🌊'},
+  {n:'Toronto',p:'ON',f:'🏙️'},{n:'Ottawa',p:'ON',f:'🏛️'},{n:'Mississauga',p:'ON',f:'🌊'},
+  {n:'Brampton',p:'ON',f:'🏭'},{n:'Hamilton',p:'ON',f:'🌐'},{n:'London',p:'ON',f:'🔵'},
+  {n:'Markham',p:'ON',f:'🏙️'},{n:'Vaughan',p:'ON',f:'🌳'},{n:'Kitchener',p:'ON',f:'🏭'},
+  {n:'Windsor',p:'ON',f:'🌉'},{n:'Oakville',p:'ON',f:'🌊'},{n:'Barrie',p:'ON',f:'⛵'},
+  {n:'Sudbury',p:'ON',f:'🪨'},{n:'Oshawa',p:'ON',f:'🚗'},{n:'Thunder Bay',p:'ON',f:'⛈️'},
+  {n:'Cambridge',p:'ON',f:'🌿'},{n:'Guelph',p:'ON',f:'🏫'},{n:'Burlington',p:'ON',f:'🌷'},
+  {n:'Ajax',p:'ON',f:'🏘️'},{n:'Whitby',p:'ON',f:'🌊'},{n:'Brantford',p:'ON',f:'🌾'},
+  {n:'St. Catharines',p:'ON',f:'🍇'},{n:'Pickering',p:'ON',f:'🏡'},{n:'Sarnia',p:'ON',f:'⛽'},
+  {n:'Kingston',p:'ON',f:'🏰'},{n:'Milton',p:'ON',f:'🌿'},{n:'Niagara Falls',p:'ON',f:'💦'},
+  {n:'Halton Hills',p:'ON',f:'🌳'},{n:'Newmarket',p:'ON',f:'🌾'},{n:'Sault Ste. Marie',p:'ON',f:'🌊'},
+  {n:'Chatham',p:'ON',f:'🌊'},{n:'Welland',p:'ON',f:'🌊'},{n:'Peterborough',p:'ON',f:'🌿'},
+  {n:'Montréal',p:'QC',f:'⚜️'},{n:'Québec City',p:'QC',f:'🏰'},{n:'Laval',p:'QC',f:'🌿'},
+  {n:'Gatineau',p:'QC',f:'🏞️'},{n:'Longueuil',p:'QC',f:'🌊'},{n:'Sherbrooke',p:'QC',f:'🌲'},
+  {n:'Saguenay',p:'QC',f:'🌊'},{n:'Lévis',p:'QC',f:'⚓'},{n:'Trois-Rivières',p:'QC',f:'🌊'},
+  {n:'Terrebonne',p:'QC',f:'🌿'},{n:'Repentigny',p:'QC',f:'🍁'},{n:'Brossard',p:'QC',f:'🌊'},
+  {n:'Halifax',p:'NS',f:'🌊'},{n:'Dartmouth',p:'NS',f:'🌊'},{n:'Sydney',p:'NS',f:'⛵'},{n:'Truro',p:'NS',f:'🌿'},
+  {n:'Moncton',p:'NB',f:'🌲'},{n:'Saint John',p:'NB',f:'⚓'},{n:'Fredericton',p:'NB',f:'🍁'},{n:'Dieppe',p:'NB',f:'🌿'},
+  {n:"St. John's",p:'NL',f:'🌊'},{n:'Corner Brook',p:'NL',f:'🌲'},{n:'Mount Pearl',p:'NL',f:'⛰️'},
+  {n:'Charlottetown',p:'PEI',f:'🏝️'},{n:'Summerside',p:'PEI',f:'🌊'},
+  {n:'Yellowknife',p:'NT',f:'❄️'},{n:'Whitehorse',p:'YT',f:'🐺'},{n:'Iqaluit',p:'NU',f:'🧊'},
+];
 
-  // ── SHOW OTHER TRAILER FIELD ──
-  document.getElementById('t_other').addEventListener('change', function() {
-    document.getElementById('trailerOtherField').style.display = this.checked ? 'flex' : 'none';
-    document.getElementById('trailerOtherField').style.flexDirection = 'column';
+// ── COUNTER ──
+function cc(id,d){
+  const el=document.getElementById(id);
+  el.value=Math.max(0,(parseInt(el.value)||0)+d);
+  prog();
+}
+
+// ── AUTOCOMPLETE FACTORY ──
+function makeAC(inId,listId,tagsId){
+  const inp=document.getElementById(inId);
+  const lst=document.getElementById(listId);
+  const tagW=document.getElementById(tagsId);
+  let sel=[],fi=-1;
+
+  inp.addEventListener('input',()=>{
+    const q=inp.value.trim().toLowerCase();
+    if(!q){lst.classList.remove('open');return;}
+    const m=CITIES.filter(c=>c.n.toLowerCase().includes(q)||c.p.toLowerCase().includes(q)).slice(0,10);
+    if(!m.length){lst.classList.remove('open');return;}
+    lst.innerHTML=m.map((c,i)=>
+      `<div class="acitem" data-i="${i}" data-n="${c.n}" data-p="${c.p}" data-f="${c.f}">
+        <span class="af">${c.f}</span><span class="an">${c.n}</span><span class="ap">${c.p}</span>
+      </div>`
+    ).join('');
+    lst.classList.add('open'); fi=-1;
+    lst.querySelectorAll('.acitem').forEach(el=>{
+      el.addEventListener('mousedown',e=>{e.preventDefault();pick(el.dataset.n,el.dataset.p,el.dataset.f);});
+    });
   });
 
-  // ── TOAST ──
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    document.getElementById('toast-msg').textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3500);
+  inp.addEventListener('keydown',e=>{
+    const its=lst.querySelectorAll('.acitem');
+    if(e.key==='ArrowDown'){fi=Math.min(fi+1,its.length-1);hl(its);e.preventDefault();}
+    else if(e.key==='ArrowUp'){fi=Math.max(fi-1,0);hl(its);e.preventDefault();}
+    else if(e.key==='Enter'&&fi>=0){e.preventDefault();const el=its[fi];pick(el.dataset.n,el.dataset.p,el.dataset.f);}
+    else if(e.key==='Escape'){lst.classList.remove('open');}
+  });
+  function hl(its){its.forEach((el,i)=>el.classList.toggle('hi',i===fi));if(fi>=0)its[fi].scrollIntoView({block:'nearest'});}
+  document.addEventListener('click',e=>{if(!inp.contains(e.target)&&!lst.contains(e.target))lst.classList.remove('open');});
+
+  function pick(name,prov,flag){
+    if(sel.find(s=>s.name===name)){inp.value='';lst.classList.remove('open');return;}
+    sel.push({name,prov,flag});render();inp.value='';lst.classList.remove('open');prog();
+  }
+  function render(){
+    tagW.innerHTML=sel.map((s,i)=>
+      `<span class="acpill">${s.flag} ${s.name}, ${s.prov}<button onclick="rm_${tagsId}(${i})">×</button></span>`
+    ).join('');
+    window[`rm_${tagsId}`]=(i)=>{sel.splice(i,1);render();prog();};
+  }
+  return {get:()=>sel};
+}
+
+const srcAC =makeAC('srcIn','srcList','srcTags');
+const destAC=makeAC('destIn','destList','destTags');
+
+// ── TRAILER OTHER ──
+document.getElementById('t50').addEventListener('change',function(){
+  document.getElementById('tOtherWrap').style.display=this.checked?'block':'none';
+});
+
+// ── CHECKBOXES → PROGRESS ──
+document.querySelectorAll('input[type=checkbox]').forEach(c=>c.addEventListener('change',prog));
+
+// ── PROGRESS ──
+const FIXED_IDS=['vancouver','surrey','abbotsford','burnaby','richmond','kelowna','kamloops','princegeorge',
+  'calgary','edmonton','reddeer','lethbridge','fortmcmurray','grandeprairie','saskatoon','regina',
+  'winnipeg','brandon','toronto','mississauga','brampton','ottawa','hamilton','london','windsor',
+  'kitchener','barrie','thunderbay','montreal','quebec','laval','sherbrooke','halifax','moncton','saintjohn','stjohns'];
+
+function prog(){
+  const totalT=FIXED_IDS.reduce((s,id)=>s+(parseInt(document.getElementById(id).value)||0),0)+srcAC.get().length;
+  const trailers=document.querySelectorAll('input[type=checkbox]:checked').length;
+  const dests=destAC.get().length;
+  let sc=0;
+  if(totalT>0)sc+=34;
+  if(trailers>0)sc+=33;
+  if(dests>0)sc+=33;
+  document.getElementById('pf').style.width=sc+'%';
+}
+
+// ── TOAST ──
+function showToast(m){
+  const t=document.getElementById('toast');
+  document.getElementById('tmsg').textContent=m;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+// ── FIXED CITY META ──
+const FIXED_META=[
+  {id:'vancouver',n:'Vancouver',p:'BC'},{id:'surrey',n:'Surrey',p:'BC'},{id:'abbotsford',n:'Abbotsford',p:'BC'},
+  {id:'burnaby',n:'Burnaby',p:'BC'},{id:'richmond',n:'Richmond',p:'BC'},{id:'kelowna',n:'Kelowna',p:'BC'},
+  {id:'kamloops',n:'Kamloops',p:'BC'},{id:'princegeorge',n:'Prince George',p:'BC'},
+  {id:'calgary',n:'Calgary',p:'AB'},{id:'edmonton',n:'Edmonton',p:'AB'},{id:'reddeer',n:'Red Deer',p:'AB'},
+  {id:'lethbridge',n:'Lethbridge',p:'AB'},{id:'fortmcmurray',n:'Fort McMurray',p:'AB'},{id:'grandeprairie',n:'Grande Prairie',p:'AB'},
+  {id:'saskatoon',n:'Saskatoon',p:'SK'},{id:'regina',n:'Regina',p:'SK'},
+  {id:'winnipeg',n:'Winnipeg',p:'MB'},{id:'brandon',n:'Brandon',p:'MB'},
+  {id:'toronto',n:'Toronto',p:'ON'},{id:'mississauga',n:'Mississauga',p:'ON'},{id:'brampton',n:'Brampton',p:'ON'},
+  {id:'ottawa',n:'Ottawa',p:'ON'},{id:'hamilton',n:'Hamilton',p:'ON'},{id:'london',n:'London',p:'ON'},
+  {id:'windsor',n:'Windsor',p:'ON'},{id:'kitchener',n:'Kitchener',p:'ON'},{id:'barrie',n:'Barrie',p:'ON'},
+  {id:'thunderbay',n:'Thunder Bay',p:'ON'},
+  {id:'montreal',n:'Montréal',p:'QC'},{id:'quebec',n:'Québec City',p:'QC'},{id:'laval',n:'Laval',p:'QC'},{id:'sherbrooke',n:'Sherbrooke',p:'QC'},
+  {id:'halifax',n:'Halifax',p:'NS'},{id:'moncton',n:'Moncton',p:'NB'},{id:'saintjohn',n:'Saint John',p:'NB'},{id:'stjohns',n:"St. John's",p:'NL'},
+];
+
+// ── SEND ──
+function sendWA(){
+  const src=FIXED_META.filter(c=>(parseInt(document.getElementById(c.id).value)||0)>0)
+    .map(c=>({n:c.n,p:c.p,cnt:parseInt(document.getElementById(c.id).value)}));
+  srcAC.get().forEach(s=>src.push({n:s.name,p:s.prov,cnt:1}));
+  const total=src.reduce((s,c)=>s+c.cnt,0);
+
+  let trailers=Array.from(document.querySelectorAll('input[type=checkbox]:checked')).map(c=>c.value);
+  if(trailers.includes('Other (specify)')){
+    const cx=document.getElementById('tOtherText').value.trim();
+    trailers=trailers.filter(t=>t!=='Other (specify)');
+    if(cx)trailers.push(cx);
   }
 
-  // ── SEND TO WHATSAPP ──
-  function sendToWhatsApp() {
-    const bc        = parseInt(document.getElementById('bc').value) || 0;
-    const alberta   = parseInt(document.getElementById('alberta').value) || 0;
-    const toronto   = parseInt(document.getElementById('toronto').value) || 0;
-    const surrey    = parseInt(document.getElementById('surrey').value) || 0;
-    const calgary   = parseInt(document.getElementById('calgary').value) || 0;
-    const otherCnt  = parseInt(document.getElementById('other_count').value) || 0;
-    const otherCity = document.getElementById('other_city').value.trim();
-    const destination = document.getElementById('destination').value.trim();
-    const contactName = document.getElementById('contact_name').value.trim();
+  const dests=destAC.get().map(d=>`${d.name}, ${d.prov}`);
+  const name=document.getElementById('cname').value.trim();
+  const phone=document.getElementById('cphone').value.trim();
+  const notes=document.getElementById('cnotes').value.trim();
 
-    // Collect selected trailers
-    const trailerChecks = document.querySelectorAll('input[name="trailer"]:checked');
-    let trailers = Array.from(trailerChecks).map(c => c.value);
-    if (trailers.includes('Other')) {
-      const customTrailer = document.getElementById('trailer_other_text').value.trim();
-      trailers = trailers.filter(t => t !== 'Other');
-      if (customTrailer) trailers.push(customTrailer);
-    }
+  if(total===0){showToast('⚠️ Enter at least 1 truck in any location.');return;}
+  if(trailers.length===0){showToast('⚠️ Select at least one trailer type.');return;}
+  if(dests.length===0){showToast('⚠️ Add at least one destination city.');return;}
 
-    // Validate
-    const totalTrucks = bc + alberta + toronto + surrey + calgary + otherCnt;
-    if (totalTrucks === 0) {
-      showToast('⚠️ Please enter at least 1 truck in any location.');
-      return;
-    }
-    if (trailers.length === 0) {
-      showToast('⚠️ Please select at least one trailer type.');
-      return;
-    }
-    if (!destination) {
-      showToast('⚠️ Please enter a destination city.');
-      return;
-    }
-
-    // Build message
-    let msg = '🚛 *TRUCK AVAILABILITY ENQUIRY*\n';
-    msg += '━━━━━━━━━━━━━━━━━━━━\n\n';
-
-    msg += '📍 *TRUCK LOCATIONS:*\n';
-    if (bc > 0)      msg += `  🍁 British Columbia (BC): *${bc} truck${bc>1?'s':''}*\n`;
-    if (alberta > 0) msg += `  🌾 Alberta (AB): *${alberta} truck${alberta>1?'s':''}*\n`;
-    if (toronto > 0) msg += `  🏙️ Toronto (ON): *${toronto} truck${toronto>1?'s':''}*\n`;
-    if (surrey > 0)  msg += `  🌊 Surrey (BC): *${surrey} truck${surrey>1?'s':''}*\n`;
-    if (calgary > 0) msg += `  🏔️ Calgary (AB): *${calgary} truck${calgary>1?'s':''}*\n`;
-    if (otherCnt > 0) {
-      const cityLabel = otherCity ? otherCity : 'Other City';
-      msg += `  📍 ${cityLabel}: *${otherCnt} truck${otherCnt>1?'s':''}*\n`;
-    }
-
-    msg += `\n  📊 *Total Trucks: ${totalTrucks}*\n\n`;
-
-    msg += '🚚 *TRAILER TYPE(S):*\n';
-    msg += `  ${trailers.join(', ')}\n\n`;
-
-    msg += '🗺️ *DESTINATION:*\n';
-    msg += `  ${destination}\n`;
-
-    if (contactName) {
-      msg += `\n👤 *CONTACT NAME:*\n  ${contactName}\n`;
-    }
-
-    msg += '\n━━━━━━━━━━━━━━━━━━━━\n';
-    msg += '_Sent via Truck Availability Form_';
-
-    const phone = '18805464284';
-    const encoded = encodeURIComponent(msg);
-    const url = `https://wa.me/${phone}?text=${encoded}`;
-
-    window.open(url, '_blank');
-    showToast('✅ Opening WhatsApp...');
+  let m='🚛 *TRUCK AVAILABILITY ENQUIRY* 🇨🇦\n';
+  m+='━━━━━━━━━━━━━━━━━━━━━━\n\n';
+  m+='📍 *SOURCE LOCATIONS:*\n';
+  src.forEach(c=>m+=`  • ${c.n}, ${c.p}: *${c.cnt} truck${c.cnt>1?'s':''}*\n`);
+  m+=`\n  📊 *Total Trucks: ${total}*\n\n`;
+  m+='🗺️ *DESTINATION(S):*\n';
+  dests.forEach(d=>m+=`  • ${d}\n`);
+  m+='\n🚚 *TRAILER TYPE(S):*\n';
+  trailers.forEach(t=>m+=`  • ${t}\n`);
+  if(name||phone){
+    m+='\n👤 *CONTACT:*\n';
+    if(name)m+=`  Name: ${name}\n`;
+    if(phone)m+=`  Phone: ${phone}\n`;
   }
+  if(notes)m+=`\n📝 *NOTES:*\n  ${notes}\n`;
+  m+='\n━━━━━━━━━━━━━━━━━━━━━━\n_Sent via Truck Availability Form_';
+
+  window.open(`https://wa.me/16048979066?text=${encodeURIComponent(m)}`,'_blank');
+  showToast('✅ Opening WhatsApp...');
+}
 </script>
 </body>
 </html>
