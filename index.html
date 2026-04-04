@@ -94,6 +94,36 @@ textarea{resize:vertical;min-height:70px}
 .chip input:checked+label{border-color:var(--teal);background:var(--teal-light);color:var(--teal2)}
 .chip label:hover{border-color:#94d4cd;background:#f0fbf9}
 
+/* ROUTE PAIRS */
+.route-card{background:#fafbff;border:1.5px solid var(--border);border-radius:14px;padding:1rem;margin-bottom:.9rem;position:relative}
+.route-card:last-child{margin-bottom:0}
+.route-row{display:flex;align-items:flex-end;gap:.75rem}
+.route-field{flex:1;display:flex;flex-direction:column;gap:.35rem}
+.route-field label{font-size:.72rem;font-weight:700;color:#374151}
+.route-arrow{width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--teal);font-size:1.1rem;flex-shrink:0;padding-bottom:.2rem}
+.route-del{position:absolute;top:.65rem;right:.75rem;background:none;border:none;cursor:pointer;color:#cbd5e1;font-size:1rem;line-height:1;padding:.1rem .3rem;border-radius:6px;transition:color .15s,background .15s}
+.route-del:hover{color:var(--red);background:#fef2f2}
+.route-num{font-size:.65rem;font-weight:800;color:var(--gray);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.55rem}
+.addroutebtn{width:100%;margin-top:.75rem;padding:.65rem;background:#f0f9f7;border:1.5px dashed #94d4cd;border-radius:10px;color:var(--teal2);font-size:.83rem;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.4rem;transition:background .15s,border-color .15s}
+.addroutebtn:hover{background:var(--teal-light);border-color:var(--teal)}
+/* ROUTE AC */
+.racw{position:relative}
+.raci{width:100%;padding:.58rem .85rem .58rem 2.1rem;border:1.5px solid var(--border);border-radius:9px;font-size:.82rem;font-family:inherit;color:#1e293b;background:#fff;outline:none;transition:border-color .2s,box-shadow .2s}
+.raci:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,122,110,.12)}
+.raci::placeholder{color:#b0bec5}
+.racico{position:absolute;left:9px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--gray)}
+.racl{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1.5px solid var(--teal);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.12);z-index:9999;max-height:200px;overflow-y:auto;display:none}
+.racl.open{display:block}
+.racitem{padding:.52rem .9rem;font-size:.8rem;cursor:pointer;display:flex;align-items:center;gap:.45rem;transition:background .12s}
+.racitem:hover,.racitem.hi{background:var(--teal-light)}
+.racitem .af{font-size:.9rem;flex-shrink:0}
+.racitem .an{font-weight:600;color:#1e293b}
+.racitem .ap{font-size:.68rem;color:var(--gray);margin-left:auto}
+/* EMAIL */
+input[type=email]{width:100%;padding:.63rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-size:.87rem;font-family:inherit;color:#1e293b;background:#fff;outline:none;transition:border-color .2s,box-shadow .2s}
+input[type=email]:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,122,110,.12)}
+input[type=email]::placeholder{color:#b0bec5}
+
 /* DIVIDER */
 .div{height:1.5px;background:var(--border);margin:1.25rem 0}
 
@@ -115,6 +145,8 @@ textarea{resize:vertical;min-height:70px}
   .fb{padding:1.2rem}
   .subarea{padding:1.2rem}
   .sh{padding:.85rem 1.2rem}
+  .route-row{flex-direction:column;gap:.5rem}
+  .route-arrow{transform:rotate(90deg);align-self:center}
 }
 @media(max-width:360px){.tgrid{grid-template-columns:1fr}}
 </style>
@@ -303,6 +335,14 @@ textarea{resize:vertical;min-height:70px}
   </div>
 
   <div class="tcat">
+    <div class="tcatlbl">🔩 Axle Configuration</div>
+    <div class="tchips">
+      <div class="chip"><input type="checkbox" id="t51" value="Tandem Axle"><label for="t51"><span class="ti">⚙️</span>Tandem Axle</label></div>
+      <div class="chip"><input type="checkbox" id="t52" value="Tridem Axle"><label for="t52"><span class="ti">🔩</span>Tridem Axle</label></div>
+    </div>
+  </div>
+
+  <div class="tcat">
     <div class="tcatlbl">🏗️ Specialized</div>
     <div class="tchips">
       <div class="chip"><input type="checkbox" id="t44" value="Livestock Trailer"><label for="t44"><span class="ti">🐄</span>Livestock</label></div>
@@ -333,9 +373,24 @@ textarea{resize:vertical;min-height:70px}
     <input type="text" id="cphone" placeholder="e.g. +1 604 000 0000">
   </div>
   <div class="field">
+    <label for="cemail">Your Email <span class="opt">(optional)</span></label>
+    <input type="email" id="cemail" placeholder="e.g. name@example.com">
+  </div>
+  <div class="field">
     <label for="cnotes">Any Other Notes</label>
     <textarea id="cnotes" placeholder="e.g. trucks available Monday, max payload, special requirements..."></textarea>
   </div>
+</div>
+
+<!-- ═══ SECTION 5: ROUTE PAIRS ═══ -->
+<div class="sh"><div class="sn">5</div><div class="st">🗺️ Route Pairs — Add Source → Destination</div></div>
+<div class="fb">
+  <p style="font-size:.78rem;color:var(--gray);margin-bottom:1rem;line-height:1.6">Add one or more source → destination routes. Each route is a pair of cities.</p>
+  <div id="routePairs"></div>
+  <button class="addroutebtn" onclick="addRoute()">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Add Another Route
+  </button>
 </div>
 
 <!-- SUBMIT -->
@@ -450,6 +505,102 @@ function makeAC(inId,listId,tagsId){
 const srcAC =makeAC('srcIn','srcList','srcTags');
 const destAC=makeAC('destIn','destList','destTags');
 
+// ── ROUTE PAIRS ──
+let routeCounter=0;
+const routes=[];
+
+function makeRouteAC(inId,listId,onPick){
+  const inp=document.getElementById(inId);
+  const lst=document.getElementById(listId);
+  let sel=null,fi=-1;
+  inp.addEventListener('input',()=>{
+    const q=inp.value.trim().toLowerCase();
+    if(!q){lst.classList.remove('open');return;}
+    const m=CITIES.filter(c=>c.n.toLowerCase().includes(q)||c.p.toLowerCase().includes(q)).slice(0,10);
+    if(!m.length){lst.classList.remove('open');return;}
+    lst.innerHTML=m.map((c,i)=>
+      `<div class="racitem" data-i="${i}" data-n="${c.n}" data-p="${c.p}" data-f="${c.f}">
+        <span class="af">${c.f}</span><span class="an">${c.n}</span><span class="ap">${c.p}</span>
+      </div>`
+    ).join('');
+    lst.classList.add('open');fi=-1;
+    lst.querySelectorAll('.racitem').forEach(el=>{
+      el.addEventListener('mousedown',e=>{e.preventDefault();
+        inp.value=`${el.dataset.f} ${el.dataset.n}, ${el.dataset.p}`;
+        sel={name:el.dataset.n,prov:el.dataset.p,flag:el.dataset.f};
+        lst.classList.remove('open');
+        if(onPick)onPick();
+      });
+    });
+  });
+  inp.addEventListener('keydown',e=>{
+    const its=lst.querySelectorAll('.racitem');
+    if(e.key==='ArrowDown'){fi=Math.min(fi+1,its.length-1);hlR(its);e.preventDefault();}
+    else if(e.key==='ArrowUp'){fi=Math.max(fi-1,0);hlR(its);e.preventDefault();}
+    else if(e.key==='Enter'&&fi>=0){e.preventDefault();const el=its[fi];
+      inp.value=`${el.dataset.f} ${el.dataset.n}, ${el.dataset.p}`;
+      sel={name:el.dataset.n,prov:el.dataset.p,flag:el.dataset.f};
+      lst.classList.remove('open');if(onPick)onPick();
+    }else if(e.key==='Escape'){lst.classList.remove('open');}
+  });
+  function hlR(its){its.forEach((el,i)=>el.classList.toggle('hi',i===fi));if(fi>=0)its[fi].scrollIntoView({block:'nearest'});}
+  document.addEventListener('click',e=>{if(!inp.contains(e.target)&&!lst.contains(e.target))lst.classList.remove('open');});
+  return {get:()=>sel,clear:()=>{sel=null;inp.value='';}};
+}
+
+function addRoute(){
+  const idx=routeCounter++;
+  const srcId=`rSrc${idx}`;const srcLId=`rSrcL${idx}`;
+  const dstId=`rDst${idx}`;const dstLId=`rDstL${idx}`;
+  const div=document.createElement('div');
+  div.className='route-card';div.id=`route${idx}`;
+  div.innerHTML=`
+    <button class="route-del" onclick="removeRoute(${idx})" title="Remove">✕</button>
+    <div class="route-num">Route ${idx+1}</div>
+    <div class="route-row">
+      <div class="route-field">
+        <label>📍 From (Source)</label>
+        <div class="racw">
+          <span class="racico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+          <input class="raci" id="${srcId}" placeholder="Search city..." autocomplete="off">
+          <div class="racl" id="${srcLId}"></div>
+        </div>
+      </div>
+      <div class="route-arrow">→</div>
+      <div class="route-field">
+        <label>🏁 To (Destination)</label>
+        <div class="racw">
+          <span class="racico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+          <input class="raci" id="${dstId}" placeholder="Search city..." autocomplete="off">
+          <div class="racl" id="${dstLId}"></div>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('routePairs').appendChild(div);
+  const srcAcR=makeRouteAC(srcId,srcLId);
+  const dstAcR=makeRouteAC(dstId,dstLId);
+  routes[idx]={el:div,src:srcAcR,dst:dstAcR};
+  renumberRoutes();
+}
+
+function removeRoute(idx){
+  const card=document.getElementById(`route${idx}`);
+  if(card)card.remove();
+  delete routes[idx];
+  renumberRoutes();
+}
+
+function renumberRoutes(){
+  let n=1;
+  document.querySelectorAll('.route-card').forEach(card=>{
+    const lbl=card.querySelector('.route-num');
+    if(lbl)lbl.textContent=`Route ${n++}`;
+  });
+}
+
+// Auto-add first route on load
+addRoute();
+
 // ── TRAILER OTHER ──
 document.getElementById('t50').addEventListener('change',function(){
   document.getElementById('tOtherWrap').style.display=this.checked?'block':'none';
@@ -517,25 +668,45 @@ function sendWA(){
   const dests=destAC.get().map(d=>`${d.name}, ${d.prov}`);
   const name=document.getElementById('cname').value.trim();
   const phone=document.getElementById('cphone').value.trim();
+  const email=document.getElementById('cemail').value.trim();
   const notes=document.getElementById('cnotes').value.trim();
+
+  // Collect route pairs
+  const routeList=[];
+  Object.values(routes).forEach(r=>{
+    if(!r)return;
+    const s=r.src.get();const d=r.dst.get();
+    if(s&&d)routeList.push({from:`${s.name}, ${s.prov}`,to:`${d.name}, ${d.prov}`});
+    else if(s)routeList.push({from:`${s.name}, ${s.prov}`,to:'(not specified)'});
+    else if(d)routeList.push({from:'(not specified)',to:`${d.name}, ${d.prov}`});
+  });
 
   if(total===0){showToast('⚠️ Enter at least 1 truck in any location.');return;}
   if(trailers.length===0){showToast('⚠️ Select at least one trailer type.');return;}
-  if(dests.length===0){showToast('⚠️ Add at least one destination city.');return;}
+  if(dests.length===0&&routeList.length===0){showToast('⚠️ Add at least one destination city or route.');return;}
 
   let m='🚛 *TRUCK AVAILABILITY ENQUIRY* 🇨🇦\n';
   m+='━━━━━━━━━━━━━━━━━━━━━━\n\n';
   m+='📍 *SOURCE LOCATIONS:*\n';
   src.forEach(c=>m+=`  • ${c.n}, ${c.p}: *${c.cnt} truck${c.cnt>1?'s':''}*\n`);
   m+=`\n  📊 *Total Trucks: ${total}*\n\n`;
-  m+='🗺️ *DESTINATION(S):*\n';
-  dests.forEach(d=>m+=`  • ${d}\n`);
-  m+='\n🚚 *TRAILER TYPE(S):*\n';
+  if(dests.length>0){
+    m+='🗺️ *DESTINATION(S):*\n';
+    dests.forEach(d=>m+=`  • ${d}\n`);
+    m+='\n';
+  }
+  if(routeList.length>0){
+    m+='🛣️ *ROUTE PAIRS:*\n';
+    routeList.forEach((r,i)=>m+=`  ${i+1}. ${r.from} → ${r.to}\n`);
+    m+='\n';
+  }
+  m+='🚚 *TRAILER TYPE(S):*\n';
   trailers.forEach(t=>m+=`  • ${t}\n`);
-  if(name||phone){
+  if(name||phone||email){
     m+='\n👤 *CONTACT:*\n';
     if(name)m+=`  Name: ${name}\n`;
     if(phone)m+=`  Phone: ${phone}\n`;
+    if(email)m+=`  Email: ${email}\n`;
   }
   if(notes)m+=`\n📝 *NOTES:*\n  ${notes}\n`;
   m+='\n━━━━━━━━━━━━━━━━━━━━━━\n_Sent via Truck Availability Form_';
