@@ -86,25 +86,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 .racitem .an{font-weight:600;color:#1e293b}
 .racitem .ap{font-size:.68rem;color:var(--gray);margin-left:auto}
 
-/* DESTINATION AUTOCOMPLETE */
-.acw{position:relative}
-.aci{width:100%;padding:.65rem 1rem .65rem 2.4rem;border:1.5px solid var(--border);border-radius:10px;font-size:.87rem;font-family:inherit;color:#1e293b;background:#fff;outline:none;transition:border-color .2s,box-shadow .2s}
-.aci:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,122,110,.12)}
-.aci::placeholder{color:#b0bec5}
-.acico{position:absolute;left:10px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--gray)}
-.acl{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1.5px solid var(--teal);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.12);z-index:9999;max-height:220px;overflow-y:auto;display:none}
-.acl.open{display:block}
-.acitem{padding:.58rem 1rem;font-size:.82rem;cursor:pointer;display:flex;align-items:center;gap:.5rem;transition:background .12s}
-.acitem:hover,.acitem.hi{background:var(--teal-light)}
-.acitem .af{font-size:.95rem;flex-shrink:0}
-.acitem .an{font-weight:600;color:#1e293b}
-.acitem .ap{font-size:.7rem;color:var(--gray);margin-left:auto}
-.actags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}
-.acpill{display:inline-flex;align-items:center;gap:.3rem;background:var(--teal-light);border:1px solid #94d4cd;color:var(--teal2);padding:.26rem .72rem;border-radius:100px;font-size:.74rem;font-weight:600}
-.acpill button{background:none;border:none;cursor:pointer;color:var(--teal2);font-size:.85rem;line-height:1;padding:0 0 0 .1rem;font-weight:700}
-.acpill button:hover{color:var(--red)}
-
-/* TRAILER CHIPS (section 3) */
+/* TRAILER CHIPS (section 2) */
 .tcat{margin-bottom:1.2rem}
 .tcat:last-child{margin-bottom:0}
 .tcatlbl{font-size:.68rem;font-weight:800;color:var(--gray);letter-spacing:.07em;text-transform:uppercase;padding:.18rem 0;border-bottom:1px solid var(--border);margin-bottom:.5rem}
@@ -283,22 +265,8 @@ input[type=email]::placeholder{color:#b0bec5}
   </button>
 </div>
 
-<!-- ═══ SECTION 2: DESTINATION ═══ -->
-<div class="sh"><div class="sn">2</div><div class="st">🗺️ Destination — Where Are Trucks Headed?</div></div>
-<div class="fb">
-  <div class="field">
-    <label>Search &amp; add destination cities</label>
-    <div class="acw">
-      <span class="acico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
-      <input class="aci" id="destIn" placeholder="Search Canadian city..." autocomplete="off">
-      <div class="acl" id="destList"></div>
-    </div>
-    <div class="actags" id="destTags"></div>
-  </div>
-</div>
-
-<!-- ═══ SECTION 3: TRAILER TYPE (checkboxes) ═══ -->
-<div class="sh"><div class="sn">3</div><div class="st">🚚 What Kind of Trailer Do You Have?</div></div>
+<!-- ═══ SECTION 2: TRAILER TYPE (checkboxes) ═══ -->
+<div class="sh"><div class="sn">2</div><div class="st">🚚 What Kind of Trailer Do You Have?</div></div>
 <div class="fb">
 
   <div class="tcat">
@@ -407,8 +375,8 @@ input[type=email]::placeholder{color:#b0bec5}
   </div>
 </div>
 
-<!-- ═══ SECTION 4: CONTACT ═══ -->
-<div class="sh"><div class="sn">4</div><div class="st">📝 Additional Info</div></div>
+<!-- ═══ SECTION 3: CONTACT ═══ -->
+<div class="sh"><div class="sn">3</div><div class="st">📝 Additional Info</div></div>
 <div class="fb">
   <div class="field">
     <label for="cname">Your Name <span class="opt">(optional)</span></label>
@@ -490,51 +458,6 @@ function handleTrailerDropdown(val){
   document.getElementById('trailerOtherWrap').style.display = (val==='__other__') ? 'block' : 'none';
   prog();
 }
-
-// ── DESTINATION AUTOCOMPLETE ──
-function makeAC(inId,listId,tagsId){
-  const inp=document.getElementById(inId);
-  const lst=document.getElementById(listId);
-  const tagW=document.getElementById(tagsId);
-  let sel=[],fi=-1;
-  inp.addEventListener('input',()=>{
-    const q=inp.value.trim().toLowerCase();
-    if(!q){lst.classList.remove('open');return;}
-    const m=CITIES.filter(c=>c.n.toLowerCase().includes(q)||c.p.toLowerCase().includes(q)).slice(0,10);
-    if(!m.length){lst.classList.remove('open');return;}
-    lst.innerHTML=m.map((c,i)=>
-      `<div class="acitem" data-i="${i}" data-n="${c.n}" data-p="${c.p}" data-f="${c.f}">
-        <span class="af">${c.f}</span><span class="an">${c.n}</span><span class="ap">${c.p}</span>
-      </div>`
-    ).join('');
-    lst.classList.add('open');fi=-1;
-    lst.querySelectorAll('.acitem').forEach(el=>{
-      el.addEventListener('mousedown',e=>{e.preventDefault();pick(el.dataset.n,el.dataset.p,el.dataset.f);});
-    });
-  });
-  inp.addEventListener('keydown',e=>{
-    const its=lst.querySelectorAll('.acitem');
-    if(e.key==='ArrowDown'){fi=Math.min(fi+1,its.length-1);hl(its);e.preventDefault();}
-    else if(e.key==='ArrowUp'){fi=Math.max(fi-1,0);hl(its);e.preventDefault();}
-    else if(e.key==='Enter'&&fi>=0){e.preventDefault();const el=its[fi];pick(el.dataset.n,el.dataset.p,el.dataset.f);}
-    else if(e.key==='Escape'){lst.classList.remove('open');}
-  });
-  function hl(its){its.forEach((el,i)=>el.classList.toggle('hi',i===fi));if(fi>=0)its[fi].scrollIntoView({block:'nearest'});}
-  document.addEventListener('click',e=>{if(!inp.contains(e.target)&&!lst.contains(e.target))lst.classList.remove('open');});
-  function pick(name,prov,flag){
-    if(sel.find(s=>s.name===name)){inp.value='';lst.classList.remove('open');return;}
-    sel.push({name,prov,flag});render();inp.value='';lst.classList.remove('open');prog();
-  }
-  function render(){
-    tagW.innerHTML=sel.map((s,i)=>
-      `<span class="acpill">${s.flag} ${s.name}, ${s.prov}<button onclick="rm_${tagsId}(${i})">×</button></span>`
-    ).join('');
-    window[`rm_${tagsId}`]=(i)=>{sel.splice(i,1);render();prog();};
-  }
-  return {get:()=>sel};
-}
-
-const destAC=makeAC('destIn','destList','destTags');
 
 // ── ROUTE PAIRS ──
 let routeCounter=0;
@@ -644,11 +567,10 @@ document.querySelectorAll('input[type=checkbox]').forEach(c=>c.addEventListener(
 function prog(){
   const trailerDrop = document.getElementById('trailerDropdown').value;
   const trailerChk  = document.querySelectorAll('input[type=checkbox]:checked').length;
-  const dests       = destAC.get().length;
   const routes_filled = Object.values(routes).filter(r=>r&&(r.src.get()||r.dst.get())).length;
   let sc=0;
   if(trailerDrop||trailerChk>0) sc+=34;
-  if(dests>0||routes_filled>0) sc+=33;
+  if(routes_filled>0) sc+=33;
   const from=document.getElementById('availFrom').value;
   if(from) sc+=33;
   document.getElementById('pf').style.width=sc+'%';
@@ -689,7 +611,6 @@ function sendWA(){
   if(trailerFromDrop && !trailers.includes(trailerFromDrop)) allTrailers.push(trailerFromDrop);
   allTrailers.push(...trailers);
 
-  const dests=destAC.get().map(d=>`${d.name}, ${d.prov}`);
   const name=document.getElementById('cname').value.trim();
   const phone=document.getElementById('cphone').value.trim();
   const email=document.getElementById('cemail').value.trim();
@@ -708,7 +629,7 @@ function sendWA(){
   });
 
   if(allTrailers.length===0){showToast('⚠️ Select at least one trailer type.');return;}
-  if(dests.length===0&&routeList.length===0){showToast('⚠️ Add at least one destination city or route.');return;}
+  if(routeList.length===0){showToast('⚠️ Add at least one route.');return;}
 
   let m='🚛 *TRUCK AVAILABILITY ENQUIRY* 🇨🇦\n';
   m+='━━━━━━━━━━━━━━━━━━━━━━\n\n';
@@ -723,11 +644,6 @@ function sendWA(){
   if(routeList.length>0){
     m+='🛣️ *ROUTE PAIRS:*\n';
     routeList.forEach((r,i)=>m+=`  ${i+1}. ${r.from} → ${r.to}\n`);
-    m+='\n';
-  }
-  if(dests.length>0){
-    m+='🗺️ *DESTINATION(S):*\n';
-    dests.forEach(d=>m+=`  • ${d}\n`);
     m+='\n';
   }
 
